@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import SectionHeading from "@/components/SectionHeading";
@@ -21,6 +20,11 @@ import {
   Zap
 } from "lucide-react";
 import { motion } from "framer-motion";
+import SolutionsOverview from "@/components/home/SolutionsOverview";
+import ServiceSteps from "@/components/home/ServiceSteps";
+import AIPoweredRecruitment from "@/components/home/AIPoweredRecruitment";
+import MissionVision from "@/components/home/MissionVision";
+import FeatureHighlights from "@/components/home/FeatureHighlights";
 
 const Index = () => {
   const fadeIn = {
@@ -169,6 +173,13 @@ const Index = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* New Sections */}
+      <SolutionsOverview />
+      <ServiceSteps />
+      <AIPoweredRecruitment />
+      <MissionVision />
+      <FeatureHighlights />
 
       {/* Features Section */}
       <section className="py-20 bg-white">
