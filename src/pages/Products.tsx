@@ -8,6 +8,7 @@ import {
   ArrowRight,
   BarChart3,
   BrainCircuit,
+  Check,
   Database,
   FileSearch,
   LineChart,
