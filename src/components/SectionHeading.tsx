@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 interface SectionHeadingProps {
   eyebrow?: string;
   title: string;
+  subtitle?: string;
   description?: string;
   align?: "left" | "center" | "right";
   className?: string;
@@ -12,6 +13,7 @@ interface SectionHeadingProps {
 const SectionHeading = ({
   eyebrow,
   title,
+  subtitle,
   description,
   align = "center",
   className,
@@ -34,6 +36,9 @@ const SectionHeading = ({
       <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 tracking-tight">
         {title}
       </h2>
+      {subtitle && (
+        <p className="text-lg text-muted-foreground mb-2">{subtitle}</p>
+      )}
       {description && (
         <p className="text-lg text-muted-foreground">{description}</p>
       )}

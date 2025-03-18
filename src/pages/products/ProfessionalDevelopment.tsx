@@ -71,8 +71,8 @@ const ProfessionalDevelopment = () => {
 
         <SectionHeading
           title="Platform Features"
-          subtitle="Tools to accelerate professional growth"
-          center={true}
+          description="Tools to accelerate professional growth"
+          align="center"
         />
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
