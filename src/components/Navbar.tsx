@@ -1,66 +1,50 @@
-
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const industryCategories = [
   {
     name: "Financial Services & Insurance",
-    description: "A single platform for sustainable workforce growth and retention",
     href: "/products/ai-recruitment",
-    color: "bg-purple-100",
     icon: "💰",
   },
   {
     name: "Healthcare",
-    description: "Make healthcare recruiting immune to inefficiencies",
     href: "/products/compliance-management",
-    color: "bg-blue-100",
     icon: "🏥",
   },
   {
     name: "Logistics & Transportation",
-    description: "The one-stop-shop for logistics and transportation recruitment",
     href: "/products/analytics-suite",
-    color: "bg-green-100",
     icon: "🚚",
   },
   {
     name: "Manufacturing & Warehousing",
-    description: "Assemble and retain a talented workforce, fast",
     href: "/products/professional-development",
-    color: "bg-amber-100",
     icon: "🏭",
   },
   {
     name: "Retail, Restaurant, & Hospitality",
-    description: "Fast, frictionless hiring for your front and back of house recruiting",
     href: "/products",
-    color: "bg-red-100",
     icon: "🍽️",
   },
   {
     name: "Staffing",
-    description: "Accelerate growth with recruiting technology built for staffing",
     href: "/products",
-    color: "bg-indigo-100",
     icon: "👥",
   },
   {
     name: "Technology & IT",
-    description: "Attract and retain top tech talent, all from one platform",
     href: "/products",
-    color: "bg-teal-100",
     icon: "💻",
   },
 ];
@@ -144,70 +128,54 @@ const Navbar = () => {
                 )}
               </Link>
 
-              <NavigationMenu>
-                <NavigationMenuList>
-                  <NavigationMenuItem>
-                    <NavigationMenuTrigger
-                      className={cn(
-                        "text-sm font-medium transition-colors hover:text-primary h-auto px-3 py-2 bg-purple-200 rounded-md",
-                        isProductPage(location.pathname)
-                          ? "text-primary"
-                          : "text-secondary/80 hover:text-secondary"
-                      )}
-                    >
-                      Products
-                      {isProductPage(location.pathname) && (
-                        <motion.div
-                          className="absolute bottom-0 left-0 h-0.5 bg-primary w-full"
-                          layoutId="navbar-indicator"
-                          transition={{ type: "spring", duration: 0.6 }}
-                        />
-                      )}
-                    </NavigationMenuTrigger>
-                    <NavigationMenuContent className="bg-white rounded-lg shadow-lg w-[650px] border p-0 mt-0">
-                      <div className="flex flex-col">
-                        <div className="p-4 border-b">
-                          <h3 className="text-lg font-semibold">Solutions</h3>
-                        </div>
-                        
-                        <div className="grid grid-cols-2 gap-4 p-4">
-                          {industryCategories.slice(0, 4).map((category) => (
-                            <Link
-                              key={category.name}
-                              to={category.href}
-                              className="group flex flex-col"
-                            >
-                              <div className={`p-2 rounded-md ${category.color} transition-colors duration-200 hover:opacity-90`}>
-                                <h4 className="font-medium text-gray-900">{category.name}</h4>
-                                <p className="text-sm text-gray-600 mt-1">
-                                  {category.description}
-                                </p>
-                              </div>
-                            </Link>
-                          ))}
-                        </div>
-                        
-                        <div className="grid grid-cols-2 gap-4 p-4 pt-0">
-                          {industryCategories.slice(4).map((category) => (
-                            <Link
-                              key={category.name}
-                              to={category.href}
-                              className="group flex flex-col"
-                            >
-                              <div className={`p-2 rounded-md ${category.color} transition-colors duration-200 hover:opacity-90`}>
-                                <h4 className="font-medium text-gray-900">{category.name}</h4>
-                                <p className="text-sm text-gray-600 mt-1">
-                                  {category.description}
-                                </p>
-                              </div>
-                            </Link>
-                          ))}
-                        </div>
-                      </div>
-                    </NavigationMenuContent>
-                  </NavigationMenuItem>
-                </NavigationMenuList>
-              </NavigationMenu>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    className={cn(
+                      "text-sm font-medium transition-colors hover:text-primary h-auto px-3 py-2 relative",
+                      isProductPage(location.pathname)
+                        ? "text-primary"
+                        : "text-secondary/80 hover:text-secondary"
+                    )}
+                  >
+                    Products
+                    {isProductPage(location.pathname) && (
+                      <motion.div
+                        className="absolute bottom-0 left-0 h-0.5 bg-primary w-full"
+                        layoutId="navbar-indicator"
+                        transition={{ type: "spring", duration: 0.6 }}
+                      />
+                    )}
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start" className="w-[240px]">
+                  <div className="py-2">
+                    <div className="px-2 pb-2 mb-2 border-b">
+                      <span className="text-sm font-medium">Products</span>
+                    </div>
+                    {productPages.map((product) => (
+                      <DropdownMenuItem key={product.name} asChild>
+                        <Link to={product.href} className="cursor-pointer">
+                          {product.name}
+                        </Link>
+                      </DropdownMenuItem>
+                    ))}
+                    
+                    <div className="px-2 py-2 mt-2 mb-2 border-b">
+                      <span className="text-sm font-medium">Industries</span>
+                    </div>
+                    {industryCategories.map((industry) => (
+                      <DropdownMenuItem key={industry.name} asChild>
+                        <Link to={industry.href} className="cursor-pointer">
+                          <span className="mr-2">{industry.icon}</span>
+                          {industry.name}
+                        </Link>
+                      </DropdownMenuItem>
+                    ))}
+                  </div>
+                </DropdownMenuContent>
+              </DropdownMenu>
 
               {navigation.slice(1).map((item) => (
                 <Link
