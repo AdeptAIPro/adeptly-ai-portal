@@ -1,128 +1,118 @@
-
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
+import React from 'react';
 import SectionHeading from "@/components/SectionHeading";
 
 const ComplianceManagement = () => {
   return (
-    <div className="pt-32 pb-20">
-      <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="max-w-4xl mx-auto text-center mb-16"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold font-display mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">
-            Compliance Management
+    <div className="pt-24 pb-16">
+      {/* Hero Section */}
+      <section className="container mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        {/* Hero Content */}
+        <div className="md:order-2">
+          <h1 className="text-4xl font-display font-bold mb-4 tracking-tight">
+            Compliance Management Solutions
           </h1>
-          <p className="text-xl text-gray-600 mb-8">
-            Automate and simplify credentialing and compliance processes with AI
+          <p className="text-lg text-muted-foreground mb-6">
+            Ensure adherence to industry regulations and internal policies with our comprehensive compliance management tools.
           </p>
-        </motion.div>
+          {/* Add call-to-action buttons here if needed */}
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex flex-col justify-center order-2 md:order-1"
-          >
-            <h2 className="text-2xl font-bold mb-4">Effortless Compliance</h2>
-            <p className="text-gray-600 mb-6">
-              Our compliance management solution automates credential verification, tracks expirations, and ensures your organization stays compliant with evolving regulations.
-            </p>
-            <ul className="space-y-3 mb-8">
-              {[
-                "Automated credential verification",
-                "Real-time compliance monitoring",
-                "Regulatory update notifications",
-                "Audit-ready documentation",
-                "Customizable compliance workflows"
-              ].map((feature, index) => (
-                <li key={index} className="flex items-start">
-                  <span className="bg-blue-100 p-1 rounded-full mr-3 mt-1">
-                    <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                  </span>
-                  <span className="text-gray-700">{feature}</span>
-                </li>
-              ))}
-            </ul>
-            <Button className="w-full sm:w-auto">Get Started</Button>
-          </motion.div>
+        {/* Hero Image */}
+        <div className="md:order-1">
+          <img
+            src="https://via.placeholder.com/600x400" // Replace with your actual image URL
+            alt="Compliance Management"
+            className="rounded-lg shadow-md"
+          />
+        </div>
+      </section>
+
+      {/* Key Features */}
+      <section className="bg-gray-50 py-16">
+        <div className="container mx-auto px-4">
+          <SectionHeading
+            title="Platform Features"
+            description="Tools to accelerate professional growth"
+            align="center"
+          />
           
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="order-1 md:order-2"
-          >
-            <div className="bg-gradient-to-br from-blue-100 to-indigo-100 p-2 rounded-xl shadow-sm mb-6">
-              <img 
-                src="/placeholder.svg" 
-                alt="Compliance Management Dashboard" 
-                className="w-full h-auto rounded-lg"
-              />
+          {/* Features Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Feature 1 */}
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <h3 className="text-xl font-semibold mb-2">Automated Compliance Checks</h3>
+              <p className="text-muted-foreground">
+                Automatically scan documents and processes for compliance with regulatory standards.
+              </p>
             </div>
-          </motion.div>
-        </div>
 
-        <SectionHeading
-          title="Key Benefits"
-          subtitle="Transform your compliance processes with automation"
-          center={true}
-        />
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-          {[
-            {
-              title: "Risk Reduction",
-              description: "Minimize compliance risks with proactive monitoring and alerts for potential issues.",
-              icon: "🛡️"
-            },
-            {
-              title: "Time Savings",
-              description: "Reduce administrative burden with automated verification and documentation.",
-              icon: "⏱️"
-            },
-            {
-              title: "Regulatory Updates",
-              description: "Stay current with automatic updates when regulations change in your industry.",
-              icon: "📝"
-            },
-            {
-              title: "Centralized Records",
-              description: "Maintain all compliance records in one secure, easily accessible location.",
-              icon: "📂"
-            },
-            {
-              title: "Audit Readiness",
-              description: "Generate comprehensive reports instantly when audits arise.",
-              icon: "✅"
-            },
-            {
-              title: "Scalable Solution",
-              description: "Easily scale your compliance processes as your organization grows.",
-              icon: "📈"
-            }
-          ].map((benefit, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
-            >
-              <div className="text-4xl mb-4">{benefit.icon}</div>
-              <h3 className="text-xl font-bold mb-3">{benefit.title}</h3>
-              <p className="text-gray-600">{benefit.description}</p>
-            </motion.div>
-          ))}
+            {/* Feature 2 */}
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <h3 className="text-xl font-semibold mb-2">Real-time Monitoring</h3>
+              <p className="text-muted-foreground">
+                Monitor compliance status in real-time with alerts and notifications for potential violations.
+              </p>
+            </div>
+
+            {/* Feature 3 */}
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <h3 className="text-xl font-semibold mb-2">Customizable Reporting</h3>
+              <p className="text-muted-foreground">
+                Generate custom reports to track compliance metrics and demonstrate adherence to stakeholders.
+              </p>
+            </div>
+
+            {/* Feature 4 */}
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <h3 className="text-xl font-semibold mb-2">Secure Data Storage</h3>
+              <p className="text-muted-foreground">
+                Store compliance-related data securely with encryption and access controls.
+              </p>
+            </div>
+
+            {/* Feature 5 */}
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <h3 className="text-xl font-semibold mb-2">Audit Trail</h3>
+              <p className="text-muted-foreground">
+                Maintain a detailed audit trail of all compliance-related activities for accountability and transparency.
+              </p>
+            </div>
+
+            {/* Feature 6 */}
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <h3 className="text-xl font-semibold mb-2">Integration with Existing Systems</h3>
+              <p className="text-muted-foreground">
+                Integrate compliance management tools with existing HR, finance, and legal systems for seamless data flow.
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <SectionHeading
+            title="What Our Clients Say"
+            description="See how our compliance management solutions have helped organizations like yours."
+            align="center"
+          />
+          {/* Add testimonials or client quotes here */}
+        </div>
+      </section>
+
+      {/* Call to Action */}
+      <section className="bg-primary py-20 text-white">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-display font-bold mb-4 tracking-tight">
+            Ready to Streamline Your Compliance Processes?
+          </h2>
+          <p className="text-lg mb-8">
+            Contact us today to learn more about our compliance management solutions and how they can benefit your organization.
+          </p>
+          {/* Add a call-to-action button here */}
+        </div>
+      </section>
     </div>
   );
 };

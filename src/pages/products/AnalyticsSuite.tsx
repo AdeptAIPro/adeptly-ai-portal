@@ -1,137 +1,147 @@
-
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
+import React from 'react';
 import SectionHeading from "@/components/SectionHeading";
 
 const AnalyticsSuite = () => {
   return (
-    <div className="pt-32 pb-20">
-      <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="max-w-4xl mx-auto text-center mb-16"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold font-display mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">
-            Analytics Suite
+    <div className="pt-24 pb-16">
+      {/* Hero Section */}
+      <section className="container mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        {/* Hero Content */}
+        <div>
+          <h1 className="text-4xl md:text-5xl font-display font-bold mb-6 tracking-tight">
+            Unlock Deeper Insights with Our Analytics Suite
           </h1>
-          <p className="text-xl text-gray-600 mb-8">
-            Powerful intelligence for proactive decision-making in workforce management
+          <p className="text-lg text-muted-foreground mb-8">
+            Transform your data into actionable intelligence. Our analytics suite provides comprehensive tools for data visualization, predictive analysis, and custom reporting.
           </p>
-        </motion.div>
+          {/* Call to Action Buttons */}
+          <div className="flex space-x-4">
+            <button className="bg-primary text-white py-3 px-6 rounded-md hover:bg-primary/90 transition-colors">
+              Explore Analytics
+            </button>
+            <button className="bg-secondary text-secondary-foreground py-3 px-6 rounded-md hover:bg-secondary/80 transition-colors">
+              Request a Demo
+            </button>
+          </div>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <div className="bg-gradient-to-br from-indigo-100 to-purple-100 p-2 rounded-xl shadow-sm mb-6">
-              <img 
-                src="/placeholder.svg" 
-                alt="Analytics Dashboard" 
-                className="w-full h-auto rounded-lg"
-              />
-            </div>
-          </motion.div>
+        {/* Hero Image */}
+        <div>
+          <img
+            src="https://via.placeholder.com/600x400"
+            alt="Analytics Dashboard"
+            className="rounded-lg shadow-md"
+          />
+        </div>
+      </section>
+
+      {/* Key Features */}
+      <section className="bg-gray-50 py-16">
+        <div className="container mx-auto px-4">
+          <SectionHeading
+            title="Platform Features"
+            description="Tools to accelerate professional growth"
+            align="center"
+          />
           
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="flex flex-col justify-center"
-          >
-            <h2 className="text-2xl font-bold mb-4">Data-Driven Decisions</h2>
-            <p className="text-gray-600 mb-6">
-              Our analytics suite transforms your workforce data into actionable insights, helping you optimize performance, predict trends, and make strategic decisions.
-            </p>
-            <ul className="space-y-3 mb-8">
-              {[
-                "Real-time performance analytics",
-                "Predictive workforce modeling",
-                "Custom reporting dashboards",
-                "Trend identification and analysis",
-                "Benchmarking against industry standards"
-              ].map((feature, index) => (
-                <li key={index} className="flex items-start">
-                  <span className="bg-purple-100 p-1 rounded-full mr-3 mt-1">
-                    <svg className="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                  </span>
-                  <span className="text-gray-700">{feature}</span>
-                </li>
-              ))}
-            </ul>
-            <Button className="w-full sm:w-auto">Explore Analytics</Button>
-          </motion.div>
-        </div>
+          {/* Features Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Feature 1 */}
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <h3 className="text-xl font-semibold mb-2">Data Visualization</h3>
+              <p className="text-muted-foreground">
+                Create interactive charts and graphs to explore your data.
+              </p>
+            </div>
 
-        <SectionHeading
-          title="Analytics Capabilities"
-          subtitle="Transform your data into strategic insights"
-          center={true}
-        />
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
-          {[
-            {
-              title: "Performance Metrics",
-              description: "Track individual and team performance with customizable KPIs.",
-              icon: "📊"
-            },
-            {
-              title: "Retention Analysis",
-              description: "Identify factors affecting employee retention and take proactive measures.",
-              icon: "🔄"
-            },
-            {
-              title: "Workforce Planning",
-              description: "Model future workforce needs based on growth projections and market trends.",
-              icon: "📅"
-            },
-            {
-              title: "Cost Optimization",
-              description: "Analyze labor costs and identify opportunities for optimization.",
-              icon: "💰"
-            },
-            {
-              title: "Skill Gap Analysis",
-              description: "Identify skill gaps and develop targeted training programs.",
-              icon: "🧩"
-            },
-            {
-              title: "Recruitment Analytics",
-              description: "Measure recruitment effectiveness and optimize hiring processes.",
-              icon: "🎯"
-            },
-            {
-              title: "Predictive Insights",
-              description: "Anticipate future trends and challenges with AI-powered predictions.",
-              icon: "🔮"
-            },
-            {
-              title: "Custom Reporting",
-              description: "Create tailored reports and dashboards for different stakeholders.",
-              icon: "📈"
-            }
-          ].map((capability, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
-            >
-              <div className="text-4xl mb-4">{capability.icon}</div>
-              <h3 className="text-xl font-bold mb-3">{capability.title}</h3>
-              <p className="text-gray-600">{capability.description}</p>
-            </motion.div>
-          ))}
+            {/* Feature 2 */}
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <h3 className="text-xl font-semibold mb-2">Predictive Analysis</h3>
+              <p className="text-muted-foreground">
+                Forecast future trends and make data-driven decisions.
+              </p>
+            </div>
+
+            {/* Feature 3 */}
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <h3 className="text-xl font-semibold mb-2">Custom Reporting</h3>
+              <p className="text-muted-foreground">
+                Generate detailed reports tailored to your specific needs.
+              </p>
+            </div>
+
+            {/* Feature 4 */}
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <h3 className="text-xl font-semibold mb-2">Real-Time Monitoring</h3>
+              <p className="text-muted-foreground">
+                Track key metrics and performance indicators in real-time.
+              </p>
+            </div>
+
+            {/* Feature 5 */}
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <h3 className="text-xl font-semibold mb-2">Data Integration</h3>
+              <p className="text-muted-foreground">
+                Seamlessly integrate data from multiple sources.
+              </p>
+            </div>
+
+            {/* Feature 6 */}
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <h3 className="text-xl font-semibold mb-2">Advanced Analytics</h3>
+              <p className="text-muted-foreground">
+                Utilize advanced statistical techniques for in-depth analysis.
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <SectionHeading
+            title="What Our Clients Say"
+            description="See how our analytics suite has helped businesses like yours."
+            align="center"
+          />
+          {/* Testimonial Slider or Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Testimonial 1 */}
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <p className="text-muted-foreground italic mb-4">
+                "The analytics suite has transformed the way we make decisions. We now have real-time insights that drive our business forward."
+              </p>
+              <h4 className="font-semibold">John Doe</h4>
+              <p className="text-sm text-muted-foreground">CEO, Example Company</p>
+            </div>
+
+            {/* Testimonial 2 */}
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <p className="text-muted-foreground italic mb-4">
+                "We've been able to identify key trends and opportunities thanks to the advanced analytics capabilities. It's a game-changer for our team."
+              </p>
+              <h4 className="font-semibold">Jane Smith</h4>
+              <p className="text-sm text-muted-foreground">Marketing Director, Another Company</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Call to Action */}
+      <section className="bg-primary py-24">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-8 tracking-tight">
+            Ready to Transform Your Data?
+          </h2>
+          <p className="text-lg text-white/80 mb-12">
+            Start your journey towards data-driven success with our analytics suite.
+          </p>
+          <button className="bg-white text-primary py-3 px-6 rounded-md hover:bg-gray-100 transition-colors">
+            Get Started Today
+          </button>
+        </div>
+      </section>
     </div>
   );
 };
