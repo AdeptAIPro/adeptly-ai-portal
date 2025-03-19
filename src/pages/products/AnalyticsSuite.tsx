@@ -1,3 +1,4 @@
+
 import React from 'react';
 import SectionHeading from "@/components/SectionHeading";
 
@@ -5,7 +6,7 @@ const AnalyticsSuite = () => {
   return (
     <div className="pt-24 pb-16">
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <section className="container mx-auto px-8 md:px-12 lg:px-16 py-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         {/* Hero Content */}
         <div>
           <h1 className="text-4xl md:text-5xl font-display font-bold mb-6 tracking-tight">
@@ -37,7 +38,7 @@ const AnalyticsSuite = () => {
 
       {/* Key Features */}
       <section className="bg-gray-50 py-16">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-8 md:px-12 lg:px-16">
           <SectionHeading
             title="Platform Features"
             description="Tools to accelerate professional growth"
@@ -99,7 +100,7 @@ const AnalyticsSuite = () => {
 
       {/* Testimonials */}
       <section className="py-16">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-8 md:px-12 lg:px-16">
           <SectionHeading
             title="What Our Clients Say"
             description="See how our analytics suite has helped businesses like yours."
@@ -130,7 +131,7 @@ const AnalyticsSuite = () => {
 
       {/* Call to Action */}
       <section className="bg-primary py-24">
-        <div className="container mx-auto px-4 text-center">
+        <div className="container mx-auto px-8 md:px-12 lg:px-16 text-center">
           <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-8 tracking-tight">
             Ready to Transform Your Data?
           </h2>

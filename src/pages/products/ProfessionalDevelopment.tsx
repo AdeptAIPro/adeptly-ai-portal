@@ -6,7 +6,7 @@ import SectionHeading from "@/components/SectionHeading";
 const ProfessionalDevelopment = () => {
   return (
     <div className="pt-32 pb-20">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-8 md:px-12 lg:px-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import SectionHeading from "@/components/SectionHeading";
 
@@ -5,7 +6,7 @@ const ComplianceManagement = () => {
   return (
     <div className="pt-24 pb-16">
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <section className="container mx-auto px-8 md:px-12 lg:px-16 py-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         {/* Hero Content */}
         <div className="md:order-2">
           <h1 className="text-4xl font-display font-bold mb-4 tracking-tight">
@@ -29,7 +30,7 @@ const ComplianceManagement = () => {
 
       {/* Key Features */}
       <section className="bg-gray-50 py-16">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-8 md:px-12 lg:px-16">
           <SectionHeading
             title="Platform Features"
             description="Tools to accelerate professional growth"
@@ -91,7 +92,7 @@ const ComplianceManagement = () => {
 
       {/* Testimonials */}
       <section className="py-16">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-8 md:px-12 lg:px-16">
           <SectionHeading
             title="What Our Clients Say"
             description="See how our compliance management solutions have helped organizations like yours."
@@ -102,12 +103,12 @@ const ComplianceManagement = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="bg-primary py-20 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-display font-bold mb-4 tracking-tight">
+      <section className="bg-primary py-20">
+        <div className="container mx-auto px-8 md:px-12 lg:px-16 text-center">
+          <h2 className="text-3xl font-display font-bold mb-4 tracking-tight text-white">
             Ready to Streamline Your Compliance Processes?
           </h2>
-          <p className="text-lg mb-8">
+          <p className="text-lg mb-8 text-white/80">
             Contact us today to learn more about our compliance management solutions and how they can benefit your organization.
           </p>
           {/* Add a call-to-action button here */}
