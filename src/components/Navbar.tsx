@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -101,22 +100,22 @@ const Navbar = () => {
           : "bg-white"
       )}
     >
-      <div className="container mx-auto px-8 sm:px-10 lg:px-12">
+      <div className="container mx-auto px-10 sm:px-12 lg:px-16">
         <div className="flex items-center justify-between h-16">
-          {/* Logo on the left */}
           <Link to="/" className="flex items-center">
-            <span className="text-2xl font-display font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">
-              Adept AI
-            </span>
+            <img 
+              src="/lovable-uploads/60852535-1853-450a-ad04-80f25e502b5a.png" 
+              alt="Adept AI Logo" 
+              className="h-10"
+            />
           </Link>
 
-          {/* Centered navigation */}
-          <div className="hidden md:flex items-center justify-center flex-1 px-8">
-            <nav className="flex items-center space-x-8">
+          <div className="hidden md:flex items-center justify-center flex-1 px-12">
+            <nav className="flex items-center space-x-10">
               <Link
                 to="/"
                 className={cn(
-                  "text-sm font-medium transition-colors hover:text-primary relative py-2 px-3",
+                  "text-sm font-medium transition-colors hover:text-primary relative py-2 px-4",
                   location.pathname === "/"
                     ? "text-primary"
                     : "text-secondary/80 hover:text-secondary"
@@ -137,7 +136,7 @@ const Navbar = () => {
                   <Button
                     variant="ghost"
                     className={cn(
-                      "text-sm font-medium transition-colors hover:text-primary h-auto px-3 py-2 relative",
+                      "text-sm font-medium transition-colors hover:text-primary h-auto px-4 py-2 relative",
                       isProductPage(location.pathname)
                         ? "text-primary"
                         : "text-secondary/80 hover:text-secondary"
@@ -186,7 +185,7 @@ const Navbar = () => {
                   key={item.name}
                   to={item.href}
                   className={cn(
-                    "text-sm font-medium transition-colors hover:text-primary relative py-2 px-3",
+                    "text-sm font-medium transition-colors hover:text-primary relative py-2 px-4",
                     location.pathname === item.href
                       ? "text-primary"
                       : "text-secondary/80 hover:text-secondary"
@@ -205,7 +204,6 @@ const Navbar = () => {
             </nav>
           </div>
 
-          {/* Right side buttons */}
           <div className="hidden md:flex items-center space-x-4">
             <Button variant="ghost" size="sm">
               Log in
@@ -241,11 +239,11 @@ const Navbar = () => {
             transition={{ duration: 0.3 }}
             className="md:hidden bg-white/95 backdrop-blur-md"
           >
-            <div className="container mx-auto px-4 pt-2 pb-4 space-y-1">
+            <div className="container mx-auto px-10 pt-2 pb-4 space-y-1">
               <Link
                 to="/"
                 className={cn(
-                  "block px-3 py-4 text-base font-medium border-b border-gray-200",
+                  "block px-4 py-4 text-base font-medium border-b border-gray-200",
                   location.pathname === "/"
                     ? "text-primary"
                     : "text-gray-700 hover:text-primary"
@@ -255,14 +253,14 @@ const Navbar = () => {
               </Link>
               
               <div className="border-b border-gray-200">
-                <div className="px-3 py-4 text-base font-medium text-gray-700">
+                <div className="px-4 py-4 text-base font-medium text-gray-700">
                   Products
                 </div>
                 <div className="pl-6 pb-2 space-y-2">
                   <Link
                     to="/products"
                     className={cn(
-                      "block px-3 py-2 text-sm font-medium",
+                      "block px-4 py-2 text-sm font-medium",
                       location.pathname === "/products"
                         ? "text-primary"
                         : "text-gray-600 hover:text-primary"
@@ -275,7 +273,7 @@ const Navbar = () => {
                       key={item.name}
                       to={item.href}
                       className={cn(
-                        "block px-3 py-2 text-sm font-medium",
+                        "block px-4 py-2 text-sm font-medium",
                         location.pathname === item.href
                           ? "text-primary"
                           : "text-gray-600 hover:text-primary"
@@ -292,7 +290,7 @@ const Navbar = () => {
                   key={item.name}
                   to={item.href}
                   className={cn(
-                    "block px-3 py-4 text-base font-medium border-b border-gray-200",
+                    "block px-4 py-4 text-base font-medium border-b border-gray-200",
                     location.pathname === item.href
                       ? "text-primary"
                       : "text-gray-700 hover:text-primary"
