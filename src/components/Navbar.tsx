@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -96,11 +97,11 @@ const Navbar = () => {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4",
         isScrolled
-          ? "bg-white/80 backdrop-blur-md shadow-sm"
-          : "bg-white"
+          ? "bg-background/80 backdrop-blur-md shadow-sm border-b border-border"
+          : "bg-background"
       )}
     >
-      <div className="container mx-auto px-10 sm:px-12 lg:px-16">
+      <div className="container mx-auto px-12 sm:px-16 lg:px-20">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center">
             <img 
@@ -111,14 +112,14 @@ const Navbar = () => {
           </Link>
 
           <div className="hidden md:flex items-center justify-center flex-1 px-12">
-            <nav className="flex items-center space-x-10">
+            <nav className="flex items-center space-x-12">
               <Link
                 to="/"
                 className={cn(
-                  "text-sm font-medium transition-colors hover:text-primary relative py-2 px-4",
+                  "text-sm font-medium transition-colors hover:text-primary relative py-2 px-5",
                   location.pathname === "/"
                     ? "text-primary"
-                    : "text-secondary/80 hover:text-secondary"
+                    : "text-foreground/80 hover:text-foreground"
                 )}
               >
                 Home
@@ -136,10 +137,10 @@ const Navbar = () => {
                   <Button
                     variant="ghost"
                     className={cn(
-                      "text-sm font-medium transition-colors hover:text-primary h-auto px-4 py-2 relative",
+                      "text-sm font-medium transition-colors hover:text-primary h-auto px-5 py-2 relative",
                       isProductPage(location.pathname)
                         ? "text-primary"
-                        : "text-secondary/80 hover:text-secondary"
+                        : "text-foreground/80 hover:text-foreground"
                     )}
                   >
                     Products
@@ -185,10 +186,10 @@ const Navbar = () => {
                   key={item.name}
                   to={item.href}
                   className={cn(
-                    "text-sm font-medium transition-colors hover:text-primary relative py-2 px-4",
+                    "text-sm font-medium transition-colors hover:text-primary relative py-2 px-5",
                     location.pathname === item.href
                       ? "text-primary"
-                      : "text-secondary/80 hover:text-secondary"
+                      : "text-foreground/80 hover:text-foreground"
                   )}
                 >
                   {item.name}
@@ -205,6 +206,7 @@ const Navbar = () => {
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
+            <ThemeToggle />
             <Button variant="ghost" size="sm">
               Log in
             </Button>
@@ -213,7 +215,8 @@ const Navbar = () => {
             </Button>
           </div>
 
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center space-x-4">
+            <ThemeToggle />
             <Button
               variant="ghost"
               size="icon"
@@ -237,33 +240,33 @@ const Navbar = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-white/95 backdrop-blur-md"
+            className="md:hidden bg-background/95 backdrop-blur-md"
           >
-            <div className="container mx-auto px-10 pt-2 pb-4 space-y-1">
+            <div className="container mx-auto px-12 pt-2 pb-4 space-y-1">
               <Link
                 to="/"
                 className={cn(
-                  "block px-4 py-4 text-base font-medium border-b border-gray-200",
+                  "block px-5 py-4 text-base font-medium border-b border-border",
                   location.pathname === "/"
                     ? "text-primary"
-                    : "text-gray-700 hover:text-primary"
+                    : "text-foreground/80 hover:text-primary"
                 )}
               >
                 Home
               </Link>
               
-              <div className="border-b border-gray-200">
-                <div className="px-4 py-4 text-base font-medium text-gray-700">
+              <div className="border-b border-border">
+                <div className="px-5 py-4 text-base font-medium text-foreground/80">
                   Products
                 </div>
                 <div className="pl-6 pb-2 space-y-2">
                   <Link
                     to="/products"
                     className={cn(
-                      "block px-4 py-2 text-sm font-medium",
+                      "block px-5 py-2 text-sm font-medium",
                       location.pathname === "/products"
                         ? "text-primary"
-                        : "text-gray-600 hover:text-primary"
+                        : "text-foreground/70 hover:text-primary"
                     )}
                   >
                     All Products
@@ -273,10 +276,10 @@ const Navbar = () => {
                       key={item.name}
                       to={item.href}
                       className={cn(
-                        "block px-4 py-2 text-sm font-medium",
+                        "block px-5 py-2 text-sm font-medium",
                         location.pathname === item.href
                           ? "text-primary"
-                          : "text-gray-600 hover:text-primary"
+                          : "text-foreground/70 hover:text-primary"
                       )}
                     >
                       {item.name}
@@ -290,10 +293,10 @@ const Navbar = () => {
                   key={item.name}
                   to={item.href}
                   className={cn(
-                    "block px-4 py-4 text-base font-medium border-b border-gray-200",
+                    "block px-5 py-4 text-base font-medium border-b border-border",
                     location.pathname === item.href
                       ? "text-primary"
-                      : "text-gray-700 hover:text-primary"
+                      : "text-foreground/80 hover:text-primary"
                   )}
                 >
                   {item.name}
