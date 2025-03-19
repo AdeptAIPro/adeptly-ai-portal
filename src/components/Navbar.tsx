@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -66,6 +67,7 @@ const Navbar = () => {
     { name: "Integrations", href: "/integrations" },
     { name: "Pricing", href: "/pricing" },
     { name: "About", href: "/about" },
+    { name: "Other", href: "/other" },
     { name: "Contact", href: "/contact" },
   ];
 
@@ -99,16 +101,18 @@ const Navbar = () => {
           : "bg-white"
       )}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-8 sm:px-10 lg:px-12">
         <div className="flex items-center justify-between h-16">
-          <div className="flex items-center space-x-8">
-            <Link to="/" className="flex items-center">
-              <span className="text-2xl font-display font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">
-                Adept AI
-              </span>
-            </Link>
+          {/* Logo on the left */}
+          <Link to="/" className="flex items-center">
+            <span className="text-2xl font-display font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">
+              Adept AI
+            </span>
+          </Link>
 
-            <nav className="hidden md:flex items-center space-x-8">
+          {/* Centered navigation */}
+          <div className="hidden md:flex items-center justify-center flex-1 px-8">
+            <nav className="flex items-center space-x-8">
               <Link
                 to="/"
                 className={cn(
@@ -201,6 +205,7 @@ const Navbar = () => {
             </nav>
           </div>
 
+          {/* Right side buttons */}
           <div className="hidden md:flex items-center space-x-4">
             <Button variant="ghost" size="sm">
               Log in
