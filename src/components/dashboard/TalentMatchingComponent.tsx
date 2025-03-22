@@ -245,7 +245,7 @@ const TalentMatchingComponent = () => {
                     checked={showMatchedOnly}
                     onCheckedChange={setShowMatchedOnly}
                   />
-                  <Label htmlFor="show-matched-only">Show high matches only (>80%)</Label>
+                  <Label htmlFor="show-matched-only">Show high matches only (&gt;80%)</Label>
                 </div>
               </div>
             </div>
