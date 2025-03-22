@@ -12,18 +12,12 @@ import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
-import Products from "./pages/Products";
-import AIRecruitment from "./pages/products/AIRecruitment";
-import ComplianceManagement from "./pages/products/ComplianceManagement";
-import AnalyticsSuite from "./pages/products/AnalyticsSuite";
-import ProfessionalDevelopment from "./pages/products/ProfessionalDevelopment";
-import Integrations from "./pages/Integrations";
-import Pricing from "./pages/Pricing";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+
+// Define empty placeholder pages for sidebar navigation
+import PlaceholderPage from "./pages/PlaceholderPage";
 
 const queryClient = new QueryClient();
 
@@ -64,74 +58,63 @@ const App = () => {
                     <Footer />
                   </>
                 } />
-                <Route path="/products" element={
-                  <>
-                    <Navbar />
-                    <Products />
-                    <Footer />
-                  </>
-                } />
-                <Route path="/products/ai-recruitment" element={
-                  <>
-                    <Navbar />
-                    <AIRecruitment />
-                    <Footer />
-                  </>
-                } />
-                <Route path="/products/compliance-management" element={
-                  <>
-                    <Navbar />
-                    <ComplianceManagement />
-                    <Footer />
-                  </>
-                } />
-                <Route path="/products/analytics-suite" element={
-                  <>
-                    <Navbar />
-                    <AnalyticsSuite />
-                    <Footer />
-                  </>
-                } />
-                <Route path="/products/professional-development" element={
-                  <>
-                    <Navbar />
-                    <ProfessionalDevelopment />
-                    <Footer />
-                  </>
-                } />
-                <Route path="/integrations" element={
-                  <>
-                    <Navbar />
-                    <Integrations />
-                    <Footer />
-                  </>
-                } />
-                <Route path="/pricing" element={
-                  <>
-                    <Navbar />
-                    <Pricing />
-                    <Footer />
-                  </>
-                } />
-                <Route path="/about" element={
-                  <>
-                    <Navbar />
-                    <About />
-                    <Footer />
-                  </>
-                } />
-                <Route path="/contact" element={
-                  <>
-                    <Navbar />
-                    <Contact />
-                    <Footer />
-                  </>
-                } />
                 
                 {/* Protected routes */}
                 <Route path="/dashboard" element={
                   <ProtectedRoute>
                     <Dashboard />
+                  </ProtectedRoute>
+                } />
+                
+                {/* Dashboard sub-routes */}
+                <Route path="/dashboard/members" element={
+                  <ProtectedRoute>
+                    <PlaceholderPage title="Members" />
+                  </ProtectedRoute>
+                } />
+                <Route path="/dashboard/messages" element={
+                  <ProtectedRoute>
+                    <PlaceholderPage title="Messages" />
+                  </ProtectedRoute>
+                } />
+                <Route path="/dashboard/challenges" element={
+                  <ProtectedRoute>
+                    <PlaceholderPage title="Challenges" />
+                  </ProtectedRoute>
+                } />
+                <Route path="/dashboard/products" element={
+                  <ProtectedRoute>
+                    <PlaceholderPage title="Products" />
+                  </ProtectedRoute>
+                } />
+                <Route path="/dashboard/events" element={
+                  <ProtectedRoute>
+                    <PlaceholderPage title="Events" />
+                  </ProtectedRoute>
+                } />
+                <Route path="/dashboard/feed" element={
+                  <ProtectedRoute>
+                    <PlaceholderPage title="Feed" />
+                  </ProtectedRoute>
+                } />
+                <Route path="/dashboard/magic-reach" element={
+                  <ProtectedRoute>
+                    <PlaceholderPage title="Magic Reach" />
+                  </ProtectedRoute>
+                } />
+                <Route path="/dashboard/promotions" element={
+                  <ProtectedRoute>
+                    <PlaceholderPage title="Promotions" />
+                  </ProtectedRoute>
+                } />
+                <Route path="/dashboard/analytics" element={
+                  <ProtectedRoute>
+                    <PlaceholderPage title="Analytics" />
+                  </ProtectedRoute>
+                } />
+                <Route path="/dashboard/settings" element={
+                  <ProtectedRoute>
+                    <PlaceholderPage title="Settings" />
                   </ProtectedRoute>
                 } />
                 

@@ -1,198 +1,187 @@
 
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
+import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle
-} from "@/components/ui/card";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger
-} from "@/components/ui/tabs";
-import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { ThemeButton } from "@/components/ThemeButton";
-import { motion } from "framer-motion";
-import {
-  BarChart3,
-  LineChart,
-  PieChart,
-  Users,
-  Database,
-  Filter,
-  Settings,
-  Search,
-  LayoutDashboard,
-  ArrowRight,
-  Link,
-  CheckCircle2,
-  PlusCircle,
-  ChevronRight,
-  Clock
+import { 
+  Users, 
+  ChevronDown, 
+  ChevronUp, 
+  PlusCircle, 
+  UserPlus, 
+  Copy, 
+  Package, 
+  Building2, 
+  DollarSign, 
+  ArrowUp,
+  BarChart3
 } from "lucide-react";
-import { toast } from "sonner";
-import IntegrationsList from "@/components/dashboard/IntegrationsList";
-import DataSources from "@/components/dashboard/DataSources";
-import DashboardOverview from "@/components/dashboard/DashboardOverview";
+
+// Task card component for the "Next thing to do" section
+interface TaskCardProps {
+  icon: React.ReactNode;
+  title: string;
+  onClick: () => void;
+}
+
+const TaskCard = ({ icon, title, onClick }: TaskCardProps) => (
+  <Card className="bg-gray-50 dark:bg-gray-800/50 hover:bg-white dark:hover:bg-gray-800 transition-colors cursor-pointer border border-gray-200 dark:border-gray-700" onClick={onClick}>
+    <CardContent className="p-6 flex flex-col items-center justify-center gap-4 text-center">
+      <div className="w-12 h-12 rounded-md bg-white dark:bg-gray-700 shadow-sm flex items-center justify-center">
+        {icon}
+      </div>
+      <p className="font-medium">{title}</p>
+    </CardContent>
+  </Card>
+);
+
+// Stat card component for the metrics at the bottom
+interface StatCardProps {
+  icon: React.ReactNode;
+  title: string;
+  value: string;
+  subtitle?: string;
+}
+
+const StatCard = ({ icon, title, value, subtitle }: StatCardProps) => (
+  <Card className="border border-gray-200 dark:border-gray-700">
+    <CardContent className="p-6">
+      <div className="flex items-center gap-2 mb-4">
+        {icon}
+        <span className="text-gray-500 dark:text-gray-400 text-sm">{title}</span>
+      </div>
+      <div className="text-3xl font-bold mb-1">{value}</div>
+      {subtitle && <div className="text-sm text-gray-500 dark:text-gray-400 flex items-center">
+        {subtitle.includes("in the last") ? (
+          <>
+            <ArrowUp className="h-4 w-4 text-green-500 mr-1" />
+            {subtitle}
+          </>
+        ) : (
+          subtitle
+        )}
+      </div>}
+    </CardContent>
+  </Card>
+);
 
 const Dashboard = () => {
-  const { user, isAuthenticated, logout } = useAuth();
-  const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState("overview");
+  const { user } = useAuth();
+  const [taskSectionCollapsed, setTaskSectionCollapsed] = useState(false);
   
-  useEffect(() => {
-    if (!isAuthenticated) {
-      navigate("/login");
-    }
-  }, [isAuthenticated, navigate]);
-
-  const handleLogout = () => {
-    logout();
-    toast.success("You've been logged out successfully");
+  const handleTaskAction = (task: string) => {
+    console.log(`Task clicked: ${task}`);
+    // In a real app, this would navigate to the relevant page or open a modal
   };
 
-  if (!user) {
-    return null; // or a loading state
-  }
-
   return (
-    <div className="flex min-h-screen flex-col bg-background text-foreground">
-      {/* Top Navigation */}
-      <header className="bg-card dark:bg-gray-900/90 border-b border-border sticky top-0 z-10">
-        <div className="container mx-auto px-4 py-3">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <h1 className="text-xl font-bold dark-high-contrast">Adept AI</h1>
-              <nav className="hidden md:flex items-center space-x-1">
-                <Button variant="ghost" className="text-sm h-9" asChild>
-                  <span className="flex items-center gap-1">
-                    <LayoutDashboard className="h-4 w-4" />
-                    Dashboard
-                  </span>
+    <div className="flex h-screen bg-gray-50 dark:bg-gray-900">
+      {/* Sidebar */}
+      <DashboardSidebar />
+      
+      {/* Main content */}
+      <div className="flex-1 overflow-auto">
+        <main className="max-w-6xl mx-auto px-6 py-8">
+          {/* Header */}
+          <div className="flex justify-between items-center mb-8">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Home</h1>
+              <p className="text-gray-500 dark:text-gray-400 flex items-center mt-1">
+                nas.io/adept-ai
+                <Button variant="ghost" size="sm" className="ml-1 h-6 w-6 p-0">
+                  <Copy className="h-4 w-4" />
                 </Button>
-                <Button variant="ghost" className="text-sm h-9">
-                  <span className="flex items-center gap-1">
-                    <Users className="h-4 w-4" />
-                    Candidates
-                  </span>
-                </Button>
-                <Button variant="ghost" className="text-sm h-9">
-                  <span className="flex items-center gap-1">
-                    <Database className="h-4 w-4" />
-                    Integrations
-                  </span>
-                </Button>
-                <Button variant="ghost" className="text-sm h-9">
-                  <span className="flex items-center gap-1">
-                    <Settings className="h-4 w-4" />
-                    Settings
-                  </span>
-                </Button>
-              </nav>
+              </p>
             </div>
+            
             <div className="flex items-center gap-3">
-              <div className="relative hidden md:block w-64">
-                <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-                <Input 
-                  placeholder="Search..." 
-                  className="pl-8 bg-background/50 focus:bg-background"
-                />
-              </div>
-              <ThemeButton />
-              <Button variant="outline" onClick={handleLogout} size="sm">
-                Log out
+              <Button variant="outline" className="flex items-center gap-2">
+                <UserPlus className="h-4 w-4" />
+                Invite
+              </Button>
+              <Button className="flex items-center gap-2">
+                <PlusCircle className="h-4 w-4" />
+                Create
+                <ChevronDown className="h-4 w-4 ml-1" />
               </Button>
             </div>
           </div>
-        </div>
-      </header>
-
-      <main className="flex-1 container mx-auto px-4 py-6">
-        <div className="flex flex-col space-y-6">
-          {/* Welcome Section */}
-          <div className="flex justify-between items-center">
-            <div>
-              <h1 className="text-2xl md:text-3xl font-bold dark-high-contrast">
-                Welcome back, {user.name}
-              </h1>
-              <p className="text-muted-foreground dark-muted-text mt-1">
-                Here's what's happening with your recruitment integrations today.
-              </p>
-            </div>
-            <Button className="hidden md:flex">
-              <PlusCircle className="mr-2 h-4 w-4" />
-              New Integration
-            </Button>
-          </div>
-
-          {/* Dashboard Tabs & Content */}
-          <Tabs defaultValue="overview" value={activeTab} onValueChange={setActiveTab} className="space-y-4">
-            <TabsList className="bg-muted/80 dark:bg-gray-800/50 p-1">
-              <TabsTrigger value="overview">Overview</TabsTrigger>
-              <TabsTrigger value="integrations">Integrations</TabsTrigger>
-              <TabsTrigger value="datasources">Data Sources</TabsTrigger>
-              <TabsTrigger value="analytics">Analytics</TabsTrigger>
-            </TabsList>
-            
-            {/* Overview Tab */}
-            <TabsContent value="overview" className="space-y-4">
-              <DashboardOverview />
-            </TabsContent>
-            
-            {/* Integrations Tab */}
-            <TabsContent value="integrations" className="space-y-4">
-              <IntegrationsList />
-            </TabsContent>
-            
-            {/* Data Sources Tab */}
-            <TabsContent value="datasources" className="space-y-4">
-              <DataSources />
-            </TabsContent>
-            
-            {/* Analytics Tab */}
-            <TabsContent value="analytics" className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* Analytics Cards */}
-                {[
-                  { title: "Candidate Matches", icon: <BarChart3 />, color: "bg-blue-100 dark:bg-blue-900/30" },
-                  { title: "Sourcing Efficiency", icon: <LineChart />, color: "bg-green-100 dark:bg-green-900/30" },
-                  { title: "Integration Health", icon: <PieChart />, color: "bg-purple-100 dark:bg-purple-900/30" }
-                ].map((card, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
-                  >
-                    <Card className="h-full dashboard-card">
-                      <CardHeader className={`${card.color} rounded-t-lg`}>
-                        <div className="flex items-center justify-between">
-                          <CardTitle className="text-lg dark-high-contrast">{card.title}</CardTitle>
-                          <div className="p-2 rounded-full bg-background">{card.icon}</div>
-                        </div>
-                      </CardHeader>
-                      <CardContent className="pt-4">
-                        <p className="text-sm text-muted-foreground dark-muted-text">
-                          Detailed analytics and insights will appear here once your integrations are active.
-                        </p>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                ))}
+          
+          {/* Next thing to do section */}
+          <div className="mb-10">
+            <div className="flex justify-between items-center mb-4">
+              <div>
+                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Next thing to do</h2>
+                <p className="text-sm text-gray-500 dark:text-gray-400">0 of 4 complete</p>
               </div>
-            </TabsContent>
-          </Tabs>
-        </div>
-      </main>
+              <Button 
+                variant="ghost" 
+                size="sm"
+                onClick={() => setTaskSectionCollapsed(!taskSectionCollapsed)}
+              >
+                {taskSectionCollapsed ? <ChevronDown className="h-5 w-5" /> : <ChevronUp className="h-5 w-5" />}
+              </Button>
+            </div>
+            
+            {!taskSectionCollapsed && (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <TaskCard 
+                  icon={<Building2 className="h-6 w-6 text-gray-700 dark:text-gray-300" />} 
+                  title="Personalize your business" 
+                  onClick={() => handleTaskAction("personalize")}
+                />
+                <TaskCard 
+                  icon={<Users className="h-6 w-6 text-gray-700 dark:text-gray-300" />} 
+                  title="Enrich your profile" 
+                  onClick={() => handleTaskAction("profile")}
+                />
+                <TaskCard 
+                  icon={<Package className="h-6 w-6 text-gray-700 dark:text-gray-300" />} 
+                  title="Create your first product" 
+                  onClick={() => handleTaskAction("product")}
+                />
+                <TaskCard 
+                  icon={<UserPlus className="h-6 w-6 text-gray-700 dark:text-gray-300" />} 
+                  title="Invite your first member" 
+                  onClick={() => handleTaskAction("invite")}
+                />
+              </div>
+            )}
+            
+            {taskSectionCollapsed ? null : (
+              <div className="text-right mt-2">
+                <Button variant="link" size="sm" className="text-gray-500 dark:text-gray-400">
+                  Dismiss forever
+                </Button>
+              </div>
+            )}
+          </div>
+          
+          {/* Stats section */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <StatCard 
+              icon={<BarChart3 className="h-5 w-5 text-gray-500" />} 
+              title="Community Visits" 
+              value="0" 
+            />
+            <StatCard 
+              icon={<Users className="h-5 w-5 text-gray-500" />} 
+              title="Total members" 
+              value="1" 
+              subtitle="2 in the last 30 days"
+            />
+            <StatCard 
+              icon={<DollarSign className="h-5 w-5 text-gray-500" />} 
+              title="March Earnings" 
+              value="USD 5" 
+              subtitle="1 Sales"
+            />
+          </div>
+        </main>
+      </div>
     </div>
   );
 };

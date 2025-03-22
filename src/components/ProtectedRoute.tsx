@@ -12,10 +12,10 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-background">
+      <div className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900">
         <div className="flex flex-col items-center gap-4">
           <Loader2 className="h-8 w-8 animate-spin text-primary" />
-          <p className="text-muted-foreground dark:text-gray-300">Loading your dashboard...</p>
+          <p className="text-gray-500 dark:text-gray-400">Loading your dashboard...</p>
         </div>
       </div>
     );

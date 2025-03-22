@@ -16,7 +16,7 @@ export function ThemeButton() {
       variant="outline"
       size="sm"
       onClick={toggleTheme}
-      className="w-10 h-10 p-0 rounded-full border border-border/80 bg-background/50 backdrop-blur-sm hover:bg-accent/10"
+      className="w-9 h-9 p-0 rounded-md bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700"
       aria-label="Toggle theme"
     >
       <motion.div
@@ -26,9 +26,9 @@ export function ThemeButton() {
         style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}
       >
         {theme === "dark" ? (
-          <Moon className="h-[1.2rem] w-[1.2rem] text-primary" />
+          <Moon className="h-[1rem] w-[1rem] text-yellow-500" />
         ) : (
-          <Sun className="h-[1.2rem] w-[1.2rem] text-yellow-400" />
+          <Sun className="h-[1rem] w-[1rem] text-amber-400" />
         )}
       </motion.div>
       <span className="sr-only">Toggle theme</span>
