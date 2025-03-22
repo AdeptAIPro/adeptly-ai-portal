@@ -37,6 +37,9 @@ export function ThemeProvider({
     const root = window.document.documentElement;
     root.classList.remove("light", "dark");
 
+    // Add transition class for smooth switching
+    root.classList.add("color-theme-in-transition");
+    
     if (theme === "system") {
       const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
         .matches
@@ -44,10 +47,28 @@ export function ThemeProvider({
         : "light";
 
       root.classList.add(systemTheme);
-      return;
+      
+      // Watch for system theme changes
+      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      const handleChange = () => {
+        if (theme === "system") {
+          root.classList.remove("light", "dark");
+          root.classList.add(
+            mediaQuery.matches ? "dark" : "light"
+          );
+        }
+      };
+      
+      mediaQuery.addEventListener("change", handleChange);
+      return () => mediaQuery.removeEventListener("change", handleChange);
+    } else {
+      root.classList.add(theme);
     }
-
-    root.classList.add(theme);
+    
+    // Remove transition class after a short delay
+    setTimeout(() => {
+      root.classList.remove("color-theme-in-transition");
+    }, 300);
   }, [theme]);
 
   const value = {

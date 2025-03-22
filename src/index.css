@@ -80,8 +80,36 @@
   html {
     @apply scroll-smooth;
   }
-
-  /* ... keep existing code (all the utility classes like smooth-transition, glass-card, etc.) */
+  
+  /* Theme transition styles */
+  .color-theme-in-transition,
+  .color-theme-in-transition *,
+  .color-theme-in-transition *:before,
+  .color-theme-in-transition *:after {
+    transition: all 0.3s ease-out !important;
+    transition-delay: 0 !important;
+  }
+  
+  /* Additional theme-related utility classes */
+  .glass-card {
+    @apply bg-white/70 dark:bg-gray-900/70 backdrop-blur-lg border border-white/20 dark:border-gray-800/30;
+  }
+  
+  .card-gradient {
+    @apply bg-gradient-to-br from-card via-card to-muted dark:from-gray-800 dark:via-gray-900 dark:to-gray-950;
+  }
+  
+  .smooth-transition {
+    @apply transition-all duration-300 ease-in-out;
+  }
+  
+  .hover-lift {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
+  }
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent to-primary;
+  }
 }
 
 @layer utilities {

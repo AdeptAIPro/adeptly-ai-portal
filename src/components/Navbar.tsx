@@ -5,6 +5,7 @@ import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { useAuth } from "@/contexts/AuthContext";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -54,6 +55,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { isAuthenticated, user, logout } = useAuth();
 
   const productPages = [
     { name: "AI Recruitment", href: "/products/ai-recruitment" },
@@ -67,7 +69,6 @@ const Navbar = () => {
     { name: "Integrations", href: "/integrations" },
     { name: "Pricing", href: "/pricing" },
     { name: "About", href: "/about" },
-    { name: "Other", href: "/other" },
     { name: "Contact", href: "/contact" },
   ];
 
@@ -202,17 +203,47 @@ const Navbar = () => {
                   )}
                 </Link>
               ))}
+              
+              {isAuthenticated && (
+                <Link
+                  to="/dashboard"
+                  className={cn(
+                    "text-sm font-medium transition-colors hover:text-primary relative py-2 px-5",
+                    location.pathname === "/dashboard"
+                      ? "text-primary"
+                      : "text-foreground/80 hover:text-primary"
+                  )}
+                >
+                  Dashboard
+                  {location.pathname === "/dashboard" && (
+                    <motion.div
+                      className="absolute bottom-0 left-0 h-0.5 bg-primary w-full"
+                      layoutId="navbar-indicator"
+                      transition={{ type: "spring", duration: 0.6 }}
+                    />
+                  )}
+                </Link>
+              )}
             </nav>
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
             <ThemeToggle />
-            <Button variant="ghost" size="sm">
-              Log in
-            </Button>
-            <Button size="sm" className="bg-primary hover:bg-primary/90">
-              Get started
-            </Button>
+            
+            {isAuthenticated ? (
+              <Button variant="outline" size="sm" onClick={logout}>
+                Log out
+              </Button>
+            ) : (
+              <>
+                <Button variant="ghost" size="sm" asChild>
+                  <Link to="/login">Log in</Link>
+                </Button>
+                <Button size="sm" className="bg-primary hover:bg-primary/90" asChild>
+                  <Link to="/signup">Sign up</Link>
+                </Button>
+              </>
+            )}
           </div>
 
           <div className="md:hidden flex items-center space-x-4">
@@ -303,13 +334,35 @@ const Navbar = () => {
                 </Link>
               ))}
               
+              {isAuthenticated && (
+                <Link
+                  to="/dashboard"
+                  className={cn(
+                    "block px-5 py-4 text-base font-medium border-b border-border",
+                    location.pathname === "/dashboard"
+                      ? "text-primary"
+                      : "text-foreground/80 hover:text-primary"
+                  )}
+                >
+                  Dashboard
+                </Link>
+              )}
+              
               <div className="flex flex-col space-y-2 pt-4">
-                <Button variant="outline" className="w-full">
-                  Log in
-                </Button>
-                <Button className="w-full bg-primary hover:bg-primary/90">
-                  Get started
-                </Button>
+                {isAuthenticated ? (
+                  <Button variant="outline" onClick={logout}>
+                    Log out
+                  </Button>
+                ) : (
+                  <>
+                    <Button variant="outline" asChild>
+                      <Link to="/login">Log in</Link>
+                    </Button>
+                    <Button className="w-full bg-primary hover:bg-primary/90" asChild>
+                      <Link to="/signup">Sign up</Link>
+                    </Button>
+                  </>
+                )}
               </div>
             </div>
           </motion.div>
