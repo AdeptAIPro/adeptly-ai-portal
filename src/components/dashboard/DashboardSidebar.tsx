@@ -14,7 +14,8 @@ import {
   Percent, 
   BarChart3, 
   Settings,
-  LogOut
+  LogOut,
+  Link as LinkIcon
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeButton } from "@/components/ThemeButton";
@@ -83,6 +84,7 @@ export const DashboardSidebar = () => {
         <nav className="px-2 space-y-1">
           <SidebarItem icon={<Users size={18} />} label="Members" href="/dashboard/members" />
           <SidebarItem icon={<MessageSquare size={18} />} label="Messages" href="/dashboard/messages" />
+          <SidebarItem icon={<LinkIcon size={18} />} label="Integrations" href="/dashboard/integrations" />
           
           <div className="pt-5 pb-2 px-3">
             <SidebarItem icon={null} label="ENGAGE" isHeader />
