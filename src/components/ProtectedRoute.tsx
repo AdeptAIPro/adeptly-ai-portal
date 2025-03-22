@@ -14,8 +14,8 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900">
         <div className="flex flex-col items-center gap-4">
-          <Loader2 className="h-8 w-8 animate-spin text-primary" />
-          <p className="text-gray-500 dark:text-gray-400">Loading your dashboard...</p>
+          <Loader2 className="h-10 w-10 animate-spin text-primary" />
+          <p className="text-gray-600 dark:text-gray-300 font-medium">Loading your dashboard...</p>
         </div>
       </div>
     );

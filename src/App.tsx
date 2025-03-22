@@ -15,6 +15,7 @@ import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import IntegrationsDashboard from "./pages/IntegrationsDashboard";
 
 // Define empty placeholder pages for sidebar navigation
 import PlaceholderPage from "./pages/PlaceholderPage";
@@ -63,6 +64,13 @@ const App = () => {
                 <Route path="/dashboard" element={
                   <ProtectedRoute>
                     <Dashboard />
+                  </ProtectedRoute>
+                } />
+                
+                {/* New Integration Dashboard */}
+                <Route path="/dashboard/integrations-hub" element={
+                  <ProtectedRoute>
+                    <IntegrationsDashboard />
                   </ProtectedRoute>
                 } />
                 

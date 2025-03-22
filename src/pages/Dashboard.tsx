@@ -1,6 +1,7 @@
 
 import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
+import { Link } from "react-router-dom";
 import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -17,7 +18,10 @@ import {
   Building2, 
   DollarSign, 
   ArrowUp,
-  BarChart3
+  BarChart3,
+  Database,
+  Link as LinkIcon,
+  ArrowRight
 } from "lucide-react";
 
 // Task card component for the "Next thing to do" section
@@ -109,6 +113,36 @@ const Dashboard = () => {
               </Button>
             </div>
           </div>
+
+          {/* Integration Hub Feature Card */}
+          <Card className="border border-primary/20 bg-primary/5 mb-8 overflow-hidden">
+            <CardContent className="p-6 flex flex-col md:flex-row justify-between items-center">
+              <div className="mb-4 md:mb-0">
+                <Badge variant="outline" className="bg-primary/10 text-primary mb-2">New Feature</Badge>
+                <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">AI Integration Hub</h2>
+                <p className="text-gray-500 dark:text-gray-400 mb-4 max-w-lg">
+                  Connect your recruitment systems, select data, and match candidates with our AI-powered talent matching engine.
+                </p>
+                <Link to="/dashboard/integrations-hub">
+                  <Button className="flex items-center gap-2 group">
+                    Explore the Integration Hub
+                    <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </Link>
+              </div>
+              <div className="flex gap-3">
+                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
+                  <LinkIcon className="h-6 w-6 text-primary" />
+                </div>
+                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
+                  <Database className="h-6 w-6 text-primary" />
+                </div>
+                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
+                  <Users className="h-6 w-6 text-primary" />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
           
           {/* Next thing to do section */}
           <div className="mb-10">
