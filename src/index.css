@@ -42,22 +42,22 @@
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
 
-    --card: 240 10% 3.9%;
+    --card: 240 10% 5.9%;
     --card-foreground: 0 0% 98%;
 
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 260 80% 50%;
+    --primary: 263 85% 65%;
     --primary-foreground: 0 0% 98%;
 
     --secondary: 240 3.7% 15.9%;
     --secondary-foreground: 0 0% 98%;
 
     --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
+    --muted-foreground: 240 5% 77%;
 
-    --accent: 262 83% 58%;
+    --accent: 262 85% 65%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 62.8% 30.6%;
@@ -65,7 +65,7 @@
 
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
-    --ring: 262 83% 58%;
+    --ring: 262 85% 65%;
   }
 
   * {
@@ -96,7 +96,7 @@
   }
   
   .card-gradient {
-    @apply bg-gradient-to-br from-card via-card to-muted dark:from-gray-800 dark:via-gray-900 dark:to-gray-950;
+    @apply bg-gradient-to-br from-card via-card to-muted dark:from-gray-800/90 dark:via-gray-900 dark:to-gray-950;
   }
   
   .smooth-transition {
@@ -119,5 +119,40 @@
   
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500;
+  }
+
+  /* Enhanced dark mode text utilities */
+  .dark-enhanced-text {
+    @apply dark:text-white dark:font-medium;
+  }
+  
+  .dark-muted-text {
+    @apply dark:text-gray-300;
+  }
+  
+  .dark-high-contrast {
+    @apply dark:text-white dark:font-semibold;
+  }
+
+  /* Integration section styling */
+  .integration-item {
+    @apply p-2 px-3 rounded-md transition-all duration-200 hover:bg-accent/10 cursor-pointer;
+  }
+  
+  .integration-item-active {
+    @apply bg-accent/20 dark:bg-accent/30 font-medium;
+  }
+  
+  /* Dashboard specific utilities */
+  .dashboard-card {
+    @apply bg-white dark:bg-gray-900/80 shadow-sm dark:shadow-gray-900/30 border border-border rounded-xl overflow-hidden transition-all;
+  }
+  
+  .dashboard-card-header {
+    @apply bg-muted/50 dark:bg-gray-800/50 border-b border-border p-4;
+  }
+  
+  .dashboard-section {
+    @apply space-y-4 p-1;
   }
 }
