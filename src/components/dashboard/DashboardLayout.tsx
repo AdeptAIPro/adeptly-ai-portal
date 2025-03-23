@@ -4,9 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { 
   LayoutDashboard, 
-  Link as LinkIcon, 
-  Database, 
-  Users, 
+  BarChart3, 
   Settings, 
   LogOut,
   Menu,
@@ -21,6 +19,7 @@ interface DashboardLayoutProps {
   children: React.ReactNode;
 }
 
+// Logo component
 const Logo = () => (
   <div className="flex items-center space-x-2">
     <div className="w-8 h-8 bg-gradient-to-br from-green-400 to-lime-300 rounded-md flex items-center justify-center overflow-hidden">
@@ -76,9 +75,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
           <div className="flex-1 py-6 overflow-y-auto">
             <nav className="px-3 space-y-1">
               <SidebarLink icon={<LayoutDashboard size={18} />} href="/dashboard" label="Dashboard" />
-              <SidebarLink icon={<LinkIcon size={18} />} href="/dashboard" label="Integrations" onClick={() => navigate('/dashboard?tab=integrations')} />
-              <SidebarLink icon={<Database size={18} />} href="/dashboard" label="Data Selection" onClick={() => navigate('/dashboard?tab=data')} />
-              <SidebarLink icon={<Users size={18} />} href="/dashboard" label="Talent Matching" onClick={() => navigate('/dashboard?tab=talent')} />
+              <SidebarLink icon={<BarChart3 size={18} />} href="/dashboard/analytics" label="Analytics" />
               <SidebarLink icon={<Settings size={18} />} href="/dashboard/settings" label="Settings" />
             </nav>
           </div>
