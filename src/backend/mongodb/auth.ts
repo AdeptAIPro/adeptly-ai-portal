@@ -49,7 +49,19 @@ export const getUserByEmail = async (email: string): Promise<User | null> => {
     const db = await connectToMongoDB();
     const usersCollection = db.collection('users');
     
-    const user = await usersCollection.findOne({ email }) as User | null;
+    const document = await usersCollection.findOne({ email });
+    
+    if (!document) return null;
+    
+    // Cast document to User type with proper properties
+    const user: User = {
+      id: document.id || document._id.toString(),
+      name: document.name,
+      email: document.email,
+      password: document.password,
+      createdAt: document.createdAt
+    };
+    
     return user;
   } catch (error) {
     console.error('Error getting user by email from MongoDB:', error);

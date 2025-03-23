@@ -7,6 +7,7 @@ interface SectionHeadingProps {
   subtitle?: string;
   description?: string;
   align?: "left" | "center" | "right";
+  centered?: boolean; // Added for backward compatibility
   className?: string;
 }
 
@@ -16,15 +17,19 @@ const SectionHeading = ({
   subtitle,
   description,
   align = "center",
+  centered, // Add support for the centered prop
   className,
 }: SectionHeadingProps) => {
+  // If centered is provided, it overrides align
+  const finalAlign = centered ? "center" : align;
+  
   return (
     <div
       className={cn(
         "max-w-3xl mx-auto mb-12",
-        align === "left" && "text-left ml-0",
-        align === "center" && "text-center",
-        align === "right" && "text-right mr-0",
+        finalAlign === "left" && "text-left ml-0",
+        finalAlign === "center" && "text-center",
+        finalAlign === "right" && "text-right mr-0",
         className
       )}
     >

@@ -22,6 +22,12 @@ import PricingPage from "./pages/Pricing";
 import AboutPage from "./pages/About";
 import CompanyPage from "./pages/Company";
 
+// Import product pages
+import AIRecruitment from "./pages/products/AIRecruitment";
+import AnalyticsSuite from "./pages/products/AnalyticsSuite";
+import ComplianceManagement from "./pages/products/ComplianceManagement";
+import ProfessionalDevelopment from "./pages/products/ProfessionalDevelopment";
+
 // Define empty placeholder pages for sidebar navigation
 import PlaceholderPage from "./pages/PlaceholderPage";
 
@@ -91,6 +97,36 @@ const App = () => {
                   <>
                     <Navbar />
                     <CompanyPage />
+                    <Footer />
+                  </>
+                } />
+                
+                {/* Product pages */}
+                <Route path="/products/ai-recruitment" element={
+                  <>
+                    <Navbar />
+                    <AIRecruitment />
+                    <Footer />
+                  </>
+                } />
+                <Route path="/products/analytics-suite" element={
+                  <>
+                    <Navbar />
+                    <AnalyticsSuite />
+                    <Footer />
+                  </>
+                } />
+                <Route path="/products/compliance-management" element={
+                  <>
+                    <Navbar />
+                    <ComplianceManagement />
+                    <Footer />
+                  </>
+                } />
+                <Route path="/products/professional-development" element={
+                  <>
+                    <Navbar />
+                    <ProfessionalDevelopment />
                     <Footer />
                   </>
                 } />
