@@ -21,6 +21,7 @@ import IntegrationsPage from "./pages/Integrations";
 import PricingPage from "./pages/Pricing";
 import AboutPage from "./pages/About";
 import CompanyPage from "./pages/Company";
+import Contact from "./pages/Contact";
 
 // Import product pages
 import AIRecruitment from "./pages/products/AIRecruitment";
@@ -97,6 +98,13 @@ const App = () => {
                   <>
                     <Navbar />
                     <CompanyPage />
+                    <Footer />
+                  </>
+                } />
+                <Route path="/contact" element={
+                  <>
+                    <Navbar />
+                    <Contact />
                     <Footer />
                   </>
                 } />
