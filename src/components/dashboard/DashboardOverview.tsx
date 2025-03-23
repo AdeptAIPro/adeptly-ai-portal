@@ -1,184 +1,357 @@
 
-import { motion } from "framer-motion";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { Separator } from "@/components/ui/separator";
-import { AreaChart } from "@/components/dashboard/charts/AreaChart";
-import { PieChart } from "@/components/dashboard/charts/PieChart";
-import { ArrowRight, BarChart3, CheckCircle2, ChevronRight, Clock, Database, Link as LinkIcon, PieChart as PieChartIcon, User, Users, Zap } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { 
+  BarChart3, 
+  Database, 
+  Link as LinkIcon, 
+  Users, 
+  Zap,
+  ArrowRight,
+  ArrowUp,
+  CheckCircle2,
+  Clock 
+} from "lucide-react";
+import { motion } from "framer-motion";
+
+const StatCard = ({ title, value, icon, color, trend }: { 
+  title: string; 
+  value: string; 
+  icon: React.ReactNode; 
+  color: string;
+  trend?: { value: string; direction: 'up' | 'down' | 'none' } 
+}) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.3 }}
+  >
+    <Card>
+      <CardContent className="p-6">
+        <div className="flex justify-between items-start">
+          <div>
+            <p className="text-sm font-medium text-muted-foreground mb-1">{title}</p>
+            <h3 className="text-2xl font-bold">{value}</h3>
+            {trend && (
+              <div className="flex items-center mt-1 text-xs">
+                {trend.direction === 'up' && <ArrowUp className="h-3 w-3 text-green-500 mr-1" />}
+                <span className={
+                  trend.direction === 'up' ? 'text-green-500' : 
+                  trend.direction === 'down' ? 'text-red-500' : 'text-muted-foreground'
+                }>
+                  {trend.value}
+                </span>
+              </div>
+            )}
+          </div>
+          <div className={`p-2 rounded-full ${color}`}>
+            {icon}
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  </motion.div>
+);
+
+const ActivityItem = ({ title, time, status }: { title: string; time: string; status: 'success' | 'pending' | 'fail' }) => {
+  const getStatusIcon = () => {
+    switch (status) {
+      case 'success': return <CheckCircle2 className="h-4 w-4 text-green-500" />;
+      case 'pending': return <Clock className="h-4 w-4 text-amber-500" />;
+      case 'fail': return <div className="h-4 w-4 rounded-full bg-red-500" />;
+    }
+  };
+  
+  return (
+    <div className="flex items-center justify-between py-3">
+      <div className="flex items-center gap-3">
+        {getStatusIcon()}
+        <span className="text-sm">{title}</span>
+      </div>
+      <span className="text-xs text-muted-foreground">{time}</span>
+    </div>
+  );
+};
 
 const DashboardOverview = () => {
   return (
     <div className="space-y-6">
-      {/* Stats Row */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {[
-          { title: "Total Integrations", value: "3", icon: <LinkIcon />, color: "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400" },
-          { title: "Active Data Sources", value: "5", icon: <Database />, color: "bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400" },
-          { title: "Candidate Profiles", value: "243", icon: <Users />, color: "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400" },
-          { title: "Live Job Listings", value: "42", icon: <Zap />, color: "bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400" }
-        ].map((stat, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: index * 0.1 }}
-          >
-            <Card className="dashboard-card">
-              <CardContent className="p-6">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground dark-muted-text mb-1">{stat.title}</p>
-                    <h3 className="text-2xl font-bold dark-high-contrast">{stat.value}</h3>
-                  </div>
-                  <div className={`p-2 rounded-full ${stat.color}`}>
-                    {stat.icon}
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        ))}
-      </div>
-      
-      {/* Charts Row */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Integration Status */}
-        <Card className="dashboard-card lg:col-span-2">
-          <CardHeader className="dashboard-card-header">
-            <CardTitle className="dark-high-contrast">Integration Activity</CardTitle>
-            <CardDescription className="dark-muted-text">
-              Data flow across your connected systems
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="p-6">
-            <div className="h-[240px] w-full">
-              <AreaChart />
-            </div>
-          </CardContent>
-          <Separator />
-          <CardFooter className="p-4 flex justify-between">
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center">
-                <div className="w-3 h-3 rounded-full bg-primary mr-2"></div>
-                <span className="text-sm text-muted-foreground dark-muted-text">Job Data</span>
-              </div>
-              <div className="flex items-center">
-                <div className="w-3 h-3 rounded-full bg-blue-500 mr-2"></div>
-                <span className="text-sm text-muted-foreground dark-muted-text">Candidate Data</span>
-              </div>
-            </div>
-            <Button variant="ghost" size="sm" className="text-primary">
-              <span>View Details</span>
-              <ChevronRight className="h-4 w-4 ml-1" />
-            </Button>
-          </CardFooter>
-        </Card>
-        
-        {/* Integration Types */}
-        <Card className="dashboard-card">
-          <CardHeader className="dashboard-card-header">
-            <div className="flex justify-between items-center">
-              <div>
-                <CardTitle className="dark-high-contrast">Integration Types</CardTitle>
-                <CardDescription className="dark-muted-text">
-                  Distribution by system type
-                </CardDescription>
-              </div>
-              <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                <PieChartIcon className="h-4 w-4" />
+      {/* Welcome Message */}
+      <Card className="border-primary/20 bg-primary/5">
+        <CardContent className="p-6">
+          <div className="space-y-3">
+            <Badge variant="outline" className="bg-primary/10 text-primary">Welcome</Badge>
+            <h1 className="text-2xl font-bold">Welcome to Adept AI Dashboard</h1>
+            <p className="text-muted-foreground max-w-2xl">
+              Connect your recruitment systems, manage data, and leverage AI to find the perfect candidates for your jobs. Let's get started!
+            </p>
+            <div className="flex flex-wrap gap-3 pt-2">
+              <Button className="gap-2">
+                <LinkIcon className="h-4 w-4" />
+                Connect Systems
+              </Button>
+              <Button variant="outline" className="gap-2">
+                Explore Features
+                <ArrowRight className="h-4 w-4" />
               </Button>
             </div>
-          </CardHeader>
-          <CardContent className="p-6 flex flex-col items-center">
-            <div className="h-[200px] w-full">
-              <PieChart />
-            </div>
-            
-            <div className="grid grid-cols-2 gap-4 w-full mt-6">
-              {[
-                { label: "VMS", value: "33%", color: "bg-primary" },
-                { label: "ATS", value: "42%", color: "bg-blue-500" },
-                { label: "Job Boards", value: "25%", color: "bg-amber-500" },
-              ].map((item, i) => (
-                <div key={i} className="flex items-center">
-                  <div className={`w-3 h-3 rounded-full ${item.color} mr-2`}></div>
-                  <div className="flex justify-between items-center w-full">
-                    <span className="text-sm dark-muted-text">{item.label}</span>
-                    <span className="text-sm font-medium dark-high-contrast">{item.value}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-      
-      {/* Recent Integrations */}
-      <Card className="dashboard-card">
-        <CardHeader className="dashboard-card-header">
-          <div className="flex justify-between items-center">
-            <div>
-              <CardTitle className="dark-high-contrast">Recent Integrations</CardTitle>
-              <CardDescription className="dark-muted-text">
-                Recently connected recruitment systems
-              </CardDescription>
-            </div>
-            <Button variant="outline" size="sm">View All</Button>
-          </div>
-        </CardHeader>
-        <CardContent className="p-0">
-          <div className="divide-y divide-border">
-            {[
-              { name: "LinkedIn Jobs", type: "Job Board", status: "Active", time: "2 hours ago" },
-              { name: "Workday", type: "ATS", status: "Active", time: "Yesterday" },
-              { name: "SAP Fieldglass", type: "VMS", status: "Setting up", time: "3 days ago" }
-            ].map((integration, index) => (
-              <div key={index} className="flex items-center justify-between p-4">
-                <div className="flex items-center space-x-3">
-                  <div className="p-2 rounded-md bg-muted/50 dark:bg-gray-800/50">
-                    <LinkIcon className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="font-medium dark-high-contrast">{integration.name}</h4>
-                    <p className="text-sm text-muted-foreground dark-muted-text">{integration.type}</p>
-                  </div>
-                </div>
-                <div className="flex items-center">
-                  <Badge 
-                    variant="outline" 
-                    className={integration.status === "Active" 
-                      ? "bg-green-100/30 text-green-700 dark:bg-green-900/30 dark:text-green-400"
-                      : "bg-amber-100/30 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
-                    }
-                  >
-                    {integration.status}
-                  </Badge>
-                  <div className="text-xs text-muted-foreground dark:text-gray-500 ml-4 flex items-center">
-                    <Clock className="h-3 w-3 mr-1" />
-                    {integration.time}
-                  </div>
-                  <TooltipProvider>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <Button variant="ghost" size="sm" className="ml-2 h-8 w-8 p-0">
-                          <ChevronRight className="h-4 w-4" />
-                        </Button>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>View details</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                </div>
-              </div>
-            ))}
           </div>
         </CardContent>
       </Card>
+      
+      {/* Stats Row */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <StatCard 
+          title="Connected Systems" 
+          value="5" 
+          icon={<LinkIcon className="h-5 w-5 text-blue-500" />}
+          color="bg-blue-100 dark:bg-blue-900/30"
+          trend={{ value: "+2 this week", direction: "up" }}
+        />
+        <StatCard 
+          title="Data Sources" 
+          value="12" 
+          icon={<Database className="h-5 w-5 text-purple-500" />}
+          color="bg-purple-100 dark:bg-purple-900/30"
+        />
+        <StatCard 
+          title="Candidate Profiles" 
+          value="328" 
+          icon={<Users className="h-5 w-5 text-green-500" />}
+          color="bg-green-100 dark:bg-green-900/30"
+          trend={{ value: "+65 this month", direction: "up" }}
+        />
+        <StatCard 
+          title="Active Jobs" 
+          value="47" 
+          icon={<Zap className="h-5 w-5 text-amber-500" />}
+          color="bg-amber-100 dark:bg-amber-900/30"
+        />
+      </div>
+      
+      {/* Main Content */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Activity Panel */}
+        <Card className="lg:col-span-2">
+          <CardHeader>
+            <CardTitle>Integration Performance</CardTitle>
+            <CardDescription>
+              Data flow across your connected systems
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Tabs defaultValue="weekly">
+              <div className="flex justify-between items-center mb-4">
+                <TabsList>
+                  <TabsTrigger value="daily">Daily</TabsTrigger>
+                  <TabsTrigger value="weekly">Weekly</TabsTrigger>
+                  <TabsTrigger value="monthly">Monthly</TabsTrigger>
+                </TabsList>
+                <Button variant="outline" size="sm">Download Report</Button>
+              </div>
+              
+              <TabsContent value="daily" className="space-y-4">
+                <div className="h-[200px] bg-muted/20 rounded-md flex items-center justify-center">
+                  <p className="text-muted-foreground">Daily performance chart would appear here</p>
+                </div>
+              </TabsContent>
+              
+              <TabsContent value="weekly" className="space-y-4">
+                <div className="h-[200px] bg-muted/20 rounded-md flex items-center justify-center">
+                  <p className="text-muted-foreground">Weekly performance chart would appear here</p>
+                </div>
+              </TabsContent>
+              
+              <TabsContent value="monthly" className="space-y-4">
+                <div className="h-[200px] bg-muted/20 rounded-md flex items-center justify-center">
+                  <p className="text-muted-foreground">Monthly performance chart would appear here</p>
+                </div>
+              </TabsContent>
+              
+              <div className="flex items-center space-x-4 mt-4">
+                <div className="flex items-center">
+                  <div className="w-3 h-3 rounded-full bg-primary mr-2"></div>
+                  <span className="text-sm text-muted-foreground">Job Data</span>
+                </div>
+                <div className="flex items-center">
+                  <div className="w-3 h-3 rounded-full bg-blue-500 mr-2"></div>
+                  <span className="text-sm text-muted-foreground">Candidate Data</span>
+                </div>
+                <div className="flex items-center">
+                  <div className="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
+                  <span className="text-sm text-muted-foreground">Applications</span>
+                </div>
+              </div>
+            </Tabs>
+          </CardContent>
+        </Card>
+        
+        {/* Recent Activity */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Recent Activity</CardTitle>
+            <CardDescription>
+              Latest events from your connected systems
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-1">
+              <ActivityItem 
+                title="Connected to LinkedIn Jobs" 
+                time="2 hours ago" 
+                status="success" 
+              />
+              <ActivityItem 
+                title="Data sync from Workday" 
+                time="5 hours ago" 
+                status="success" 
+              />
+              <ActivityItem 
+                title="Talent matching in progress" 
+                time="In progress" 
+                status="pending" 
+              />
+              <ActivityItem 
+                title="Connection attempt to ICIMS" 
+                time="Yesterday" 
+                status="fail" 
+              />
+              <ActivityItem 
+                title="Synced 43 jobs from SAP Fieldglass" 
+                time="2 days ago" 
+                status="success" 
+              />
+            </div>
+            
+            <Button variant="outline" className="w-full mt-4" size="sm">
+              View All Activity
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+      
+      {/* System Health */}
+      <Card>
+        <CardHeader>
+          <CardTitle>System Health & Performance</CardTitle>
+          <CardDescription>
+            Monitoring the health of your integrations and data pipelines
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="space-y-4">
+              <h3 className="text-sm font-medium">API Response Time</h3>
+              <div className="space-y-2">
+                <div className="flex justify-between text-sm">
+                  <span>LinkedIn API</span>
+                  <span className="text-green-600">180ms</span>
+                </div>
+                <Progress value={18} className="h-2" />
+                
+                <div className="flex justify-between text-sm">
+                  <span>Workday API</span>
+                  <span className="text-green-600">220ms</span>
+                </div>
+                <Progress value={22} className="h-2" />
+                
+                <div className="flex justify-between text-sm">
+                  <span>SAP Fieldglass API</span>
+                  <span className="text-amber-600">450ms</span>
+                </div>
+                <Progress value={45} className="h-2" />
+              </div>
+            </div>
+            
+            <div className="space-y-4">
+              <h3 className="text-sm font-medium">Data Processing</h3>
+              <div className="space-y-2">
+                <div className="flex justify-between text-sm">
+                  <span>Job Data</span>
+                  <span className="text-green-600">Healthy</span>
+                </div>
+                <Progress value={92} className="h-2" />
+                
+                <div className="flex justify-between text-sm">
+                  <span>Candidate Profiles</span>
+                  <span className="text-green-600">Healthy</span>
+                </div>
+                <Progress value={95} className="h-2" />
+                
+                <div className="flex justify-between text-sm">
+                  <span>Application Data</span>
+                  <span className="text-green-600">Healthy</span>
+                </div>
+                <Progress value={90} className="h-2" />
+              </div>
+            </div>
+            
+            <div className="space-y-4">
+              <h3 className="text-sm font-medium">Service Status</h3>
+              <div className="space-y-3">
+                {[
+                  { name: "Integration Services", status: "Operational", statusColor: "text-green-600" },
+                  { name: "Data Synchronization", status: "Operational", statusColor: "text-green-600" },
+                  { name: "AI Matching Engine", status: "Operational", statusColor: "text-green-600" },
+                  { name: "Reporting Services", status: "Degraded", statusColor: "text-amber-600" }
+                ].map((service, i) => (
+                  <div key={i} className="flex justify-between items-center">
+                    <span className="text-sm">{service.name}</span>
+                    <span className={`text-sm font-medium ${service.statusColor}`}>
+                      {service.status}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+      
+      {/* Quick Links */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <Card>
+          <CardContent className="p-6 flex flex-col items-center text-center">
+            <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <LinkIcon className="h-6 w-6 text-primary" />
+            </div>
+            <h3 className="font-medium mb-2">Connect New System</h3>
+            <p className="text-sm text-muted-foreground mb-4">Add more recruitment systems to enhance your talent pool</p>
+            <Button variant="outline" className="w-full">
+              Manage Integrations
+            </Button>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardContent className="p-6 flex flex-col items-center text-center">
+            <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <Database className="h-6 w-6 text-primary" />
+            </div>
+            <h3 className="font-medium mb-2">Configure Data Sources</h3>
+            <p className="text-sm text-muted-foreground mb-4">Select what data to sync from your integrated systems</p>
+            <Button variant="outline" className="w-full">
+              Manage Data
+            </Button>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardContent className="p-6 flex flex-col items-center text-center">
+            <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+              <Users className="h-6 w-6 text-primary" />
+            </div>
+            <h3 className="font-medium mb-2">Run Talent Matching</h3>
+            <p className="text-sm text-muted-foreground mb-4">Find the best candidates for your open positions</p>
+            <Button variant="outline" className="w-full">
+              Match Talent
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 };
