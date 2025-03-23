@@ -49,7 +49,6 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
-      {/* Remove className from Navbar component */}
       <Navbar />
       
       <div className="flex flex-1 overflow-hidden">
@@ -67,7 +66,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         <div className={`
           ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
           transition-transform duration-300 ease-in-out
-          md:translate-x-0 fixed md:static z-40 h-[calc(100vh-64px)] w-64 
+          md:translate-x-0 fixed md:relative z-40 h-[calc(100vh-64px)] w-64 
           bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col
         `}>
           <div className="p-4 border-b border-gray-200 dark:border-gray-800">
@@ -94,7 +93,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         </div>
         
         {/* Main Content */}
-        <div className="flex-1 overflow-y-auto pb-10">
+        <div className="flex-1 overflow-y-auto p-6 w-full h-[calc(100vh-64px)]">
           {children}
         </div>
       </div>
