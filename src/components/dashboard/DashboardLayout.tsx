@@ -49,7 +49,8 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
-      <Navbar className="border-b border-gray-200 dark:border-gray-800" />
+      {/* Remove className from Navbar component */}
+      <Navbar />
       
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar Toggle for Mobile */}
