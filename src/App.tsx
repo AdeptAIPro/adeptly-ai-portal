@@ -17,6 +17,10 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import IntegrationsDashboard from "./pages/IntegrationsDashboard";
 import IntegrationsOverviewPage from "./pages/IntegrationsOverview";
+import IntegrationsPage from "./pages/Integrations";
+import PricingPage from "./pages/Pricing";
+import AboutPage from "./pages/About";
+import CompanyPage from "./pages/Company";
 
 // Define empty placeholder pages for sidebar navigation
 import PlaceholderPage from "./pages/PlaceholderPage";
@@ -57,6 +61,36 @@ const App = () => {
                   <>
                     <Navbar />
                     <Index />
+                    <Footer />
+                  </>
+                } />
+                
+                {/* Public pages with Navbar and Footer */}
+                <Route path="/integrations" element={
+                  <>
+                    <Navbar />
+                    <IntegrationsPage />
+                    <Footer />
+                  </>
+                } />
+                <Route path="/pricing" element={
+                  <>
+                    <Navbar />
+                    <PricingPage />
+                    <Footer />
+                  </>
+                } />
+                <Route path="/about" element={
+                  <>
+                    <Navbar />
+                    <AboutPage />
+                    <Footer />
+                  </>
+                } />
+                <Route path="/company" element={
+                  <>
+                    <Navbar />
+                    <CompanyPage />
                     <Footer />
                   </>
                 } />
