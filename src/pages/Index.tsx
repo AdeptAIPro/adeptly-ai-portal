@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import SectionHeading from "@/components/SectionHeading";
@@ -26,8 +25,7 @@ import ServiceSteps from "@/components/home/ServiceSteps";
 import AIPoweredRecruitment from "@/components/home/AIPoweredRecruitment";
 import MissionVision from "@/components/home/MissionVision";
 import FeatureHighlights from "@/components/home/FeatureHighlights";
-import ResumeUploadSection from "@/components/home/ResumeUploadSection";
-import JobMatchingSection from "@/components/home/JobMatchingSection"; // Added new import
+import JobMatchingSection from "@/components/home/JobMatchingSection"; // This is now our combined section
 
 const Index = () => {
   const fadeIn = {
@@ -184,12 +182,9 @@ const Index = () => {
       <MissionVision />
       <FeatureHighlights />
       
-      {/* Job Matching Section - Added new section */}
+      {/* Combined Job Matching Section (includes job description, results, and resume upload) */}
       <JobMatchingSection />
       
-      {/* Resume Upload Section */}
-      <ResumeUploadSection />
-
       {/* Features Section */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
@@ -289,6 +284,7 @@ const Index = () => {
                   },
                   {
                     number: "04",
+03",
                     title: "Deploy",
                     description: "Seamless implementation with minimal disruption to your existing workflows and operations."
                   }
