@@ -284,7 +284,6 @@ const Index = () => {
                   },
                   {
                     number: "04",
-03",
                     title: "Deploy",
                     description: "Seamless implementation with minimal disruption to your existing workflows and operations."
                   }
