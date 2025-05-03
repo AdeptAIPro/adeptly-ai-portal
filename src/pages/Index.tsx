@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import SectionHeading from "@/components/SectionHeading";
@@ -26,6 +27,7 @@ import AIPoweredRecruitment from "@/components/home/AIPoweredRecruitment";
 import MissionVision from "@/components/home/MissionVision";
 import FeatureHighlights from "@/components/home/FeatureHighlights";
 import ResumeUploadSection from "@/components/home/ResumeUploadSection";
+import JobMatchingSection from "@/components/home/JobMatchingSection"; // Added new import
 
 const Index = () => {
   const fadeIn = {
@@ -182,7 +184,10 @@ const Index = () => {
       <MissionVision />
       <FeatureHighlights />
       
-      {/* Resume Upload Section - Added new section */}
+      {/* Job Matching Section - Added new section */}
+      <JobMatchingSection />
+      
+      {/* Resume Upload Section */}
       <ResumeUploadSection />
 
       {/* Features Section */}
