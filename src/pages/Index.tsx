@@ -25,6 +25,7 @@ import ServiceSteps from "@/components/home/ServiceSteps";
 import AIPoweredRecruitment from "@/components/home/AIPoweredRecruitment";
 import MissionVision from "@/components/home/MissionVision";
 import FeatureHighlights from "@/components/home/FeatureHighlights";
+import ResumeUploadSection from "@/components/home/ResumeUploadSection";
 
 const Index = () => {
   const fadeIn = {
@@ -180,6 +181,9 @@ const Index = () => {
       <AIPoweredRecruitment />
       <MissionVision />
       <FeatureHighlights />
+      
+      {/* Resume Upload Section - Added new section */}
+      <ResumeUploadSection />
 
       {/* Features Section */}
       <section className="py-20 bg-white">
