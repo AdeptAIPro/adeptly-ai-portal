@@ -22,6 +22,7 @@ import PricingPage from "./pages/Pricing";
 import AboutPage from "./pages/About";
 import CompanyPage from "./pages/Company";
 import Contact from "./pages/Contact";
+import TalentMarketplace from "./pages/TalentMarketplace";
 
 // Import product pages
 import AIRecruitment from "./pages/products/AIRecruitment";
@@ -105,6 +106,15 @@ const App = () => {
                   <>
                     <Navbar />
                     <Contact />
+                    <Footer />
+                  </>
+                } />
+                
+                {/* New Talent Marketplace route */}
+                <Route path="/marketplace/talent" element={
+                  <>
+                    <Navbar />
+                    <TalentMarketplace />
                     <Footer />
                   </>
                 } />

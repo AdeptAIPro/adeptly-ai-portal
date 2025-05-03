@@ -1,8 +1,9 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Upload, Check, AlertCircle } from "lucide-react";
+import { Upload, Check, AlertCircle, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const ResumeUploadSection = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -75,9 +76,20 @@ const ResumeUploadSection = () => {
           
           <p className="text-lg text-muted-foreground mb-8">
             Submit your resume to be considered for future openings that match your skills and experience. 
-            Our recruitment team regularly reviews uploaded resumes and will contact you if there's a fit. 
-            Upload your file below and take the first step toward your next job.
+            Our recruitment team regularly reviews uploaded resumes and will contact you if there's a fit.
           </p>
+          
+          {/* New prominent button for talent marketplace */}
+          <div className="mb-10">
+            <Link to="/marketplace/talent">
+              <Button 
+                className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white px-8 py-6 h-auto text-lg font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 group"
+              >
+                Explore Talent Marketplace
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </Link>
+          </div>
           
           <div className="bg-white p-8 rounded-lg shadow-sm mb-6">
             <div className="flex flex-col items-center justify-center gap-4">
