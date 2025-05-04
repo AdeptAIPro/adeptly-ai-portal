@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import SectionHeading from "@/components/SectionHeading";
@@ -25,7 +26,7 @@ import ServiceSteps from "@/components/home/ServiceSteps";
 import AIPoweredRecruitment from "@/components/home/AIPoweredRecruitment";
 import MissionVision from "@/components/home/MissionVision";
 import FeatureHighlights from "@/components/home/FeatureHighlights";
-import JobMatchingSection from "@/components/home/JobMatchingSection"; // This is now our combined section
+import JobMatchingSelectorDemo from "@/components/home/jobMatching/JobMatchingSelectorDemo"; // Import the demo component
 
 const Index = () => {
   const fadeIn = {
@@ -182,8 +183,8 @@ const Index = () => {
       <MissionVision />
       <FeatureHighlights />
       
-      {/* Combined Job Matching Section (includes job description, results, and resume upload) */}
-      <JobMatchingSection />
+      {/* Job Matching Section with Design Options */}
+      <JobMatchingSelectorDemo />
       
       {/* Features Section */}
       <section className="py-20 bg-white">
