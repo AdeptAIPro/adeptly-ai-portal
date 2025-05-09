@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import JobMatchingSection from "../JobMatchingSection"; // Default option (our new design)
 import JobMatchingOption1 from "./JobMatchingOption1";
 import JobMatchingOption2 from "./JobMatchingOption2";
 import JobMatchingOption3 from "./JobMatchingOption3";
@@ -9,7 +10,7 @@ import JobMatchingOption4 from "./JobMatchingOption4";
 import JobMatchingOption5 from "./JobMatchingOption5";
 
 const JobMatchingSelectorDemo = () => {
-  const [selectedOption, setSelectedOption] = useState<number>(1);
+  const [selectedOption, setSelectedOption] = useState<number>(0); // Default to our new design (0)
 
   return (
     <div className="bg-gradient-to-b from-white to-gray-50 min-h-screen">
@@ -19,7 +20,7 @@ const JobMatchingSelectorDemo = () => {
         </h2>
         
         <div className="flex flex-wrap justify-center gap-4 mb-10">
-          {[1, 2, 3, 4, 5].map((option) => (
+          {[0, 1, 2, 3, 4, 5].map((option) => (
             <Button
               key={option}
               onClick={() => setSelectedOption(option)}
@@ -30,12 +31,13 @@ const JobMatchingSelectorDemo = () => {
                   : "hover:bg-gray-100"
               }`}
             >
-              Option {option}
+              {option === 0 ? "Default" : `Option ${option}`}
             </Button>
           ))}
         </div>
 
         <div className="rounded-2xl shadow-xl overflow-hidden border border-gray-200">
+          {selectedOption === 0 && <JobMatchingSection />}
           {selectedOption === 1 && <JobMatchingOption1 />}
           {selectedOption === 2 && <JobMatchingOption2 />}
           {selectedOption === 3 && <JobMatchingOption3 />}
