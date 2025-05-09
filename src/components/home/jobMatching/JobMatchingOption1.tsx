@@ -81,7 +81,7 @@ const JobMatchingOption1 = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="bg-gradient-to-br from-gray-50 to-gray-100 text-gray-800 py-16 px-6 md:px-10"
+      className="bg-gradient-to-br from-gray-50 to-gray-100 text-gray-800 py-16 px-3 md:px-6"
     >
       <div className="max-w-7xl mx-auto space-y-12">
         <div className="text-center">
@@ -94,13 +94,13 @@ const JobMatchingOption1 = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Job Description Section */}
           <motion.div 
             initial={{ x: -20, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}
-            className="bg-white rounded-xl p-8 shadow-sm border border-gray-200"
+            className="bg-white rounded-xl p-6 shadow-sm border border-gray-200"
           >
             <div className="flex items-center gap-3 mb-5">
               <div className="text-indigo-600">
@@ -164,7 +164,7 @@ const JobMatchingOption1 = () => {
             initial={{ x: 20, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.5 }}
-            className="bg-white rounded-xl p-8 shadow-sm border border-gray-200"
+            className="bg-white rounded-xl p-6 shadow-sm border border-gray-200"
           >
             <div className="flex items-center gap-3 mb-5">
               <div className="text-indigo-600">
@@ -177,7 +177,7 @@ const JobMatchingOption1 = () => {
             </p>
             
             <div className="space-y-6">
-              <div className="relative border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+              <div className="relative border-2 border-dashed border-gray-300 rounded-lg p-5 text-center">
                 <input
                   type="file"
                   id="resume-upload"
@@ -265,7 +265,7 @@ const JobMatchingOption1 = () => {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.5 }}
-          className="bg-white rounded-xl p-8 shadow-sm border border-gray-200"
+          className="bg-white rounded-xl p-6 shadow-sm border border-gray-200"
         >
           <h3 className="text-xl font-semibold mb-6">Matching Results</h3>
           
@@ -324,7 +324,7 @@ const JobMatchingOption1 = () => {
           <p>Our AI analyzes job descriptions and resumes to provide the best possible matches, using
           <br />advanced machine learning models trained on millions of successful placements.</p>
           
-          <div className="flex items-center justify-center gap-4 mt-4">
+          <div className="flex flex-wrap items-center justify-center gap-3 mt-3">
             <span className="bg-gray-200 text-gray-600 px-3 py-1 rounded-full text-xs">SOC 2 Compliant</span>
             <span className="bg-gray-200 text-gray-600 px-3 py-1 rounded-full text-xs">GDPR Compliant</span>
             <span className="bg-gray-200 text-gray-600 px-3 py-1 rounded-full text-xs">99.9% Uptime</span>

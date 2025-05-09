@@ -8,16 +8,16 @@ import { Upload } from "lucide-react";
 
 const TalentMarketplace = () => {
   return (
-    <div className="container mx-auto py-12 px-4 max-w-4xl">
-      <div className="mb-10">
-        <h1 className="text-3xl md:text-4xl font-display font-bold mb-4">Upload Your Resume</h1>
+    <div className="container mx-auto py-12 px-3 sm:px-4 max-w-4xl">
+      <div className="mb-8">
+        <h1 className="text-3xl md:text-4xl font-display font-bold mb-3">Upload Your Resume</h1>
         <p className="text-lg text-muted-foreground">
           Submit your resume to be discovered by top employers
         </p>
       </div>
 
-      <div className="bg-white p-8 rounded-lg shadow-sm">
-        <form className="space-y-6">
+      <div className="bg-white p-6 sm:p-8 rounded-lg shadow-sm">
+        <form className="space-y-5">
           <div>
             <Label htmlFor="fullName">Full Name</Label>
             <Input 
@@ -27,7 +27,7 @@ const TalentMarketplace = () => {
             />
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             <div>
               <Label htmlFor="email">Email</Label>
               <Input 
@@ -70,7 +70,7 @@ const TalentMarketplace = () => {
           
           <div>
             <Label>Resume</Label>
-            <div className="mt-1 border-2 border-dashed border-gray-300 rounded-lg p-6 flex flex-col items-center justify-center">
+            <div className="mt-1 border-2 border-dashed border-gray-300 rounded-lg p-5 flex flex-col items-center justify-center">
               <Upload className="h-8 w-8 text-gray-400 mb-2" />
               <p className="text-sm text-gray-500">
                 <span className="font-medium">Click to upload</span> or drag and drop

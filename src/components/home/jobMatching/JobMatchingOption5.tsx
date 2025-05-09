@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Search, Upload, ArrowRight } from "lucide-react";
+import { Search, Upload, ArrowRight, Shield, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Form, FormField, FormItem, FormControl } from "@/components/ui/form";
+import { Form, FormField, FormItem, FormControl, FormLabel } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { FormValues, MockResumeMatch, UploadStatus } from "../types";
@@ -75,374 +75,301 @@ const JobMatchingOption5 = () => {
     }, 1000);
   };
 
-  const cardVariants = {
-    hidden: { y: 50, opacity: 0 },
-    visible: (i: number) => ({
-      y: 0,
-      opacity: 1,
-      transition: {
-        delay: i * 0.1,
-        duration: 0.6,
-        ease: [0.22, 1, 0.36, 1]
-      }
-    })
-  };
-
   return (
-    <div className="bg-[#111] text-white min-h-screen overflow-hidden">
-      {/* 3D perspective wrapper */}
-      <div className="py-16 max-w-7xl mx-auto px-6 perspective-1000">
-        <motion.div
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <h1 className="text-5xl md:text-6xl font-bold mb-4 tracking-tight relative">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF3366] via-[#FF9933] to-[#FFFF33]">
-              AI-Powered Talent Matching
-            </span>
-            <div className="absolute -inset-x-32 top-1/2 h-px bg-gradient-to-r from-transparent via-[#FF3366]/20 to-transparent"></div>
-          </h1>
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="bg-gradient-to-br from-gray-50 to-gray-100 text-gray-800 py-16 px-6 md:px-10"
+    >
+      <div className="max-w-7xl mx-auto space-y-12">
+        <div className="text-center">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            AI-Powered Talent Matching
+          </h2>
           
-          <p className="text-gray-400 text-xl max-w-3xl mx-auto">
-            Our advanced AI system connects the right talent with the right opportunities
+          <p className="text-lg mb-12 max-w-3xl mx-auto">
+            Find the perfect candidates for your positions or submit your resume to be matched with future opportunities.
           </p>
-        </motion.div>
+        </div>
         
-        <div className="relative">
-          {/* 3D Grid Layout */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {/* Card 1: Job Description */}
-            <motion.div
-              custom={0}
-              variants={cardVariants}
-              initial="hidden"
-              animate="visible"
-              className="glass-card group"
-              style={{ 
-                perspective: "1000px",
-                transformStyle: "preserve-3d",
-              }}
-            >
-              <div className="h-full p-8 relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#111] to-[#222] border border-white/10 shadow-[0_15px_40px_-15px_rgba(255,51,102,0.3)]">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#FF3366]/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                
-                {/* Glow effect */}
-                <div className="absolute -inset-px bg-gradient-to-r from-[#FF3366] to-[#FF9933] rounded-2xl opacity-0 group-hover:opacity-20 blur-md transition-opacity duration-500"></div>
-                
-                <div className="relative z-10">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#FF3366] to-[#FF9933] flex items-center justify-center mb-6 shadow-lg shadow-[#FF3366]/20">
-                    <Search className="w-7 h-7 text-white" />
-                  </div>
-                  
-                  <h2 className="text-3xl font-bold mb-4">Job Description</h2>
-                  <p className="text-gray-400 mb-6">Enter the details of the position you're looking to fill</p>
-                  
-                  <Form {...form}>
-                    <form onSubmit={form.handleSubmit(handleSearch)} className="space-y-5">
-                      <FormField
-                        control={form.control}
-                        name="jobDescription"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormControl>
-                              <Textarea 
-                                placeholder="Describe the job position, required skills..."
-                                className="min-h-[200px] resize-none bg-white/5 border-white/10 focus-visible:ring-[#FF3366]/50 focus-visible:border-[#FF3366]/50 placeholder:text-gray-500 text-white"
-                                {...field}
-                              />
-                            </FormControl>
-                          </FormItem>
-                        )}
-                      />
-                      
-                      <Button 
-                        type="submit" 
-                        disabled={isSearching}
-                        className="w-full bg-gradient-to-r from-[#FF3366] to-[#FF9933] hover:opacity-90 text-white py-6 font-medium text-lg shadow-[0_5px_30px_-15px_rgba(255,51,102,0.6)] transition-all duration-300 hover:shadow-[0_5px_40px_-10px_rgba(255,51,102,0.7)]"
-                      >
-                        {isSearching ? (
-                          <span className="flex items-center">
-                            <svg className="animate-spin -ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                            </svg>
-                            Processing...
-                          </span>
-                        ) : (
-                          <span className="flex items-center">
-                            <Search className="mr-2 h-5 w-5" />
-                            Find Matches
-                          </span>
-                        )}
-                      </Button>
-                    </form>
-                  </Form>
-                </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Job Description Section */}
+          <motion.div 
+            initial={{ x: -20, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className="gradient-border"
+          >
+            <div className="flex items-center gap-3 mb-5">
+              <div className="text-indigo-600">
+                <Search className="w-5 h-5" />
               </div>
-            </motion.div>
+              <h3 className="text-xl font-semibold">Enter Job Description</h3>
+            </div>
+            <p className="text-gray-600 text-sm mb-6">
+              Our AI analyzes your requirements to find the best talent match
+            </p>
             
-            {/* Card 2: Results */}
-            <motion.div
-              custom={1}
-              variants={cardVariants}
-              initial="hidden"
-              animate="visible"
-              className="glass-card group md:translate-y-6"
-              style={{ 
-                perspective: "1000px",
-                transformStyle: "preserve-3d",
-              }}
-            >
-              <div className="h-full p-8 relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#111] to-[#222] border border-white/10 shadow-[0_15px_40px_-15px_rgba(255,153,51,0.3)]">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#FF9933]/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(handleSearch)} className="space-y-5">
+                <FormField
+                  control={form.control}
+                  name="jobDescription"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="font-medium">Job Description</FormLabel>
+                      <FormControl>
+                        <Textarea 
+                          placeholder="Describe the job position, required skills, experience level, and responsibilities in detail..."
+                          className="min-h-[150px] resize-none border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+                          {...field}
+                        />
+                      </FormControl>
+                      <p className="text-xs text-gray-500 flex items-center mt-1">
+                        <CheckCircle2 className="h-3 w-3 mr-1 inline" />
+                        More details = better matches
+                      </p>
+                    </FormItem>
+                  )}
+                />
                 
-                {/* Glow effect */}
-                <div className="absolute -inset-px bg-gradient-to-r from-[#FF9933] to-[#FFFF33] rounded-2xl opacity-0 group-hover:opacity-20 blur-md transition-opacity duration-500"></div>
-                
-                <div className="relative z-10">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#FF9933] to-[#FFFF33] flex items-center justify-center mb-6 shadow-lg shadow-[#FF9933]/20">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                <Button 
+                  type="submit" 
+                  disabled={isSearching} 
+                  className="w-full bg-indigo-600 hover:bg-indigo-700 text-white"
+                >
+                  {isSearching ? (
+                    <span className="flex items-center justify-center">
+                      <svg className="animate-spin -ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Searching...
+                    </span>
+                  ) : (
+                    <span className="flex items-center justify-center">
+                      <Search className="mr-2 h-5 w-5" />
+                      Find Matches
+                    </span>
+                  )}
+                </Button>
+              </form>
+            </Form>
+          </motion.div>
+          
+          {/* Resume Upload Section */}
+          <motion.div 
+            initial={{ x: 20, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+            className="gradient-border"
+          >
+            <div className="flex items-center gap-3 mb-5">
+              <div className="text-indigo-600">
+                <Upload className="w-5 h-5" />
+              </div>
+              <h3 className="text-xl font-semibold">Submit Your Resume</h3>
+            </div>
+            <p className="text-gray-600 text-sm mb-6">
+              Join our talent marketplace to get matched with opportunities
+            </p>
+            
+            <div className="space-y-6">
+              <div className="relative border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                <input
+                  type="file"
+                  id="resume-upload"
+                  className="sr-only"
+                  onChange={handleFileChange}
+                  accept=".pdf,.doc,.docx"
+                />
+                <div className="flex flex-col items-center">
+                  <div className="text-indigo-400 mb-3">
+                    <svg className="mx-auto h-12 w-12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M14 2.26953V6.40007C14 6.96012 14 7.24015 14.109 7.45406C14.2049 7.64222 14.3578 7.7952 14.546 7.89108C14.7599 8.00007 15.0399 8.00007 15.6 8.00007H19.7305M14 17.5L16.5 15M16.5 15L19 17.5M16.5 15V21M6 8.00007H9M6 12.0001H9M6 16.0001H12M14 2.00007H8.8C7.11984 2.00007 6.27976 2.00007 5.63803 2.32715C5.07354 2.6146 4.6146 3.07354 4.32715 3.63803C4 4.27976 4 5.11984 4 6.80005V17.2001C4 18.8803 4 19.7203 4.32715 20.3621C4.6146 20.9266 5.07354 21.3855 5.63803 21.673C6.27976 22.0001 7.11984 22.0001 8.8 22.0001H16.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </div>
-                  
-                  <h2 className="text-3xl font-bold mb-4">Matching Results</h2>
-                  <p className="text-gray-400 mb-6">View candidates that match your job description</p>
-                  
-                  {!matches && !isSearching ? (
-                    <div className="h-[300px] flex items-center justify-center rounded-xl border border-dashed border-white/10 bg-white/5 p-4">
-                      <div className="text-center">
-                        <div className="w-20 h-20 rounded-full bg-white/5 mx-auto mb-4 flex items-center justify-center">
-                          <Search className="w-10 h-10 text-gray-500" />
-                        </div>
-                        <p className="text-gray-400 text-lg">
-                          Enter a job description<br />to see matching candidates
-                        </p>
-                      </div>
-                    </div>
-                  ) : isSearching ? (
-                    <div className="h-[300px] flex items-center justify-center">
-                      <div className="text-center">
-                        <div className="mx-auto mb-6 relative">
-                          <svg className="w-24 h-24 animate-pulse" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="50" cy="50" r="45" fill="none" stroke="url(#grad)" strokeWidth="8" strokeLinecap="round">
-                              <animateTransform 
-                                attributeName="transform" 
-                                type="rotate"
-                                dur="2s" 
-                                repeatCount="indefinite"
-                                from="0 50 50"
-                                to="360 50 50" />
-                            </circle>
-                            <defs>
-                              <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" stopColor="#FF9933" />
-                                <stop offset="100%" stopColor="#FFFF33" />
-                              </linearGradient>
-                            </defs>
-                          </svg>
-                        </div>
-                        <p className="text-lg font-medium text-transparent bg-clip-text bg-gradient-to-r from-[#FF9933] to-[#FFFF33]">
-                          Finding your perfect matches...
-                        </p>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="space-y-4 max-h-[300px] overflow-auto custom-scrollbar pr-2">
-                      {matches && matches.map((match, idx) => (
-                        <motion.div 
-                          key={match.id} 
-                          initial={{ opacity: 0, x: -10 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: idx * 0.1 }}
-                          className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:border-[#FF9933]/50 transition duration-300"
-                        >
-                          <div className="flex justify-between items-center mb-2">
-                            <h4 className="text-xl font-medium">{match.name}</h4>
-                            <div className="px-3 py-1 rounded-full bg-gradient-to-r from-[#FF9933] to-[#FFFF33] text-black font-bold text-sm">
-                              {match.matchScore}% Match
-                            </div>
-                          </div>
-                          <div className="w-full h-1 bg-white/10 rounded-full mb-3">
-                            <div 
-                              className="h-full rounded-full bg-gradient-to-r from-[#FF9933] to-[#FFFF33]" 
-                              style={{ width: `${match.matchScore}%` }}
-                            ></div>
-                          </div>
-                          <div className="flex flex-wrap gap-1 mb-1">
-                            {match.topSkills.map((skill, index) => (
-                              <span key={index} className="bg-white/5 text-gray-300 px-2 py-0.5 rounded-md text-xs border border-white/10">
-                                {skill}
-                              </span>
-                            ))}
-                          </div>
-                          <div className="text-xs text-gray-400">
-                            Experience: {match.experience}
-                          </div>
-                        </motion.div>
-                      ))}
-                      
-                      <p className="text-sm text-gray-500 pt-2">
-                        {matches && `Showing top ${matches.length} candidates`}
-                      </p>
-                    </div>
-                  )}
+                  <label
+                    htmlFor="resume-upload"
+                    className="block cursor-pointer"
+                  >
+                    <h4 className="text-indigo-600 font-medium mb-1">Drag & drop or click to upload</h4>
+                    <p className="text-sm text-gray-500">
+                      PDF, DOC, DOCX (MAX. 5MB)
+                    </p>
+                  </label>
                 </div>
               </div>
-            </motion.div>
-            
-            {/* Card 3: Upload Section */}
-            <motion.div
-              custom={2}
-              variants={cardVariants}
-              initial="hidden"
-              animate="visible"
-              className="glass-card group"
-              style={{ 
-                perspective: "1000px",
-                transformStyle: "preserve-3d",
-              }}
-            >
-              <div className="h-full p-8 relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#111] to-[#222] border border-white/10 shadow-[0_15px_40px_-15px_rgba(255,255,51,0.3)]">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#FFFF33]/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                
-                {/* Glow effect */}
-                <div className="absolute -inset-px bg-gradient-to-r from-[#FFFF33] to-[#33FF99] rounded-2xl opacity-0 group-hover:opacity-20 blur-md transition-opacity duration-500"></div>
-                
-                <div className="relative z-10">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#FFFF33] to-[#33FF99] flex items-center justify-center mb-6 shadow-lg shadow-[#FFFF33]/20">
-                    <Upload className="w-7 h-7 text-black" />
+              
+              {uploadStatus === "error" && (
+                <div className="flex items-center gap-2 text-red-500 text-sm bg-red-50 p-3 rounded-lg">
+                  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 16.0001V16.0101M12 8.00007V12.0001M12 22.0001C17.5228 22.0001 22 17.5229 22 12.0001C22 6.47721 17.5228 2.00007 12 2.00007C6.47715 2.00007 2 6.47721 2 12.0001C2 17.5229 6.47715 22.0001 12 22.0001Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  <span>{errorMessage}</span>
+                </div>
+              )}
+              
+              {file && uploadStatus !== "error" && (
+                <div className="flex items-center gap-3 bg-gray-50 p-3 rounded-lg">
+                  <div className="bg-indigo-100 rounded-lg p-2">
+                    <svg className="h-6 w-6 text-indigo-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M14 2.26953V6.40007C14 6.96012 14 7.24015 14.109 7.45406C14.2049 7.64222 14.3578 7.7952 14.546 7.89108C14.7599 8.00007 15.0399 8.00007 15.6 8.00007H19.7305M14 2.00007H8.8C7.11984 2.00007 6.27976 2.00007 5.63803 2.32715C5.07354 2.6146 4.6146 3.07354 4.32715 3.63803C4 4.27976 4 5.11984 4 6.80005V17.2001C4 18.8803 4 19.7203 4.32715 20.3621C4.6146 20.9266 5.07354 21.3855 5.63803 21.673C6.27976 22.0001 7.11984 22.0001 8.8 22.0001H15.2C16.8802 22.0001 17.7202 22.0001 18.362 21.673C18.9265 21.3855 19.3854 20.9266 19.6729 20.3621C20 19.7203 20 18.8803 20 17.2001V8.00007" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
                   </div>
-                  
-                  <h2 className="text-3xl font-bold mb-4">Submit Resume</h2>
-                  <p className="text-gray-400 mb-6">Upload your resume to find matching opportunities</p>
-                  
-                  <div className="mb-6">
-                    <Link to="/marketplace/talent">
-                      <Button 
-                        className="w-full bg-gradient-to-r from-[#FFFF33] to-[#33FF99] text-black hover:opacity-90 group relative overflow-hidden py-6 font-medium text-lg shadow-[0_5px_30px_-15px_rgba(255,255,51,0.6)] transition-all duration-300 hover:shadow-[0_5px_40px_-10px_rgba(255,255,51,0.7)]"
-                      >
-                        <span className="relative z-10 flex items-center">
-                          Explore Talent Marketplace
-                          <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                        </span>
-                      </Button>
-                    </Link>
-                  </div>
-                  
-                  <div className="space-y-4">
-                    <div className="relative">
-                      <input
-                        type="file"
-                        id="resume-upload"
-                        className="sr-only"
-                        onChange={handleFileChange}
-                        accept=".pdf,.doc,.docx"
-                      />
-                      <label
-                        htmlFor="resume-upload"
-                        className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed rounded-xl cursor-pointer bg-white/5 hover:bg-white/10 border-white/10 transition-all duration-300"
-                      >
-                        <div className="flex flex-col items-center justify-center py-5">
-                          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#FFFF33]/20 to-[#33FF99]/20 flex items-center justify-center mb-3">
-                            <Upload className="w-8 h-8 text-[#FFFF33]" />
-                          </div>
-                          <p className="text-center">
-                            <span className="font-medium">Drop files here</span> or click to browse
-                          </p>
-                          <p className="text-xs text-gray-500 mt-1">
-                            PDF, DOC, DOCX (MAX. 5MB)
-                          </p>
-                        </div>
-                      </label>
-                    </div>
-                    
-                    {uploadStatus === "error" && (
-                      <div className="bg-red-900/20 border border-red-500/30 text-red-400 rounded-lg p-3 text-sm">
-                        <span>{errorMessage}</span>
-                      </div>
-                    )}
-                    
-                    {file && uploadStatus !== "error" && (
-                      <div className="bg-white/5 rounded-lg p-3 border border-white/10">
-                        <div className="flex items-center">
-                          <div className="bg-[#FFFF33]/10 rounded-lg p-2 mr-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#FFFF33]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                          </div>
-                          <div className="text-sm flex-1">
-                            <p className="font-medium truncate text-gray-200">{file.name}</p>
-                            <p className="text-gray-500">
-                              {Math.round(file.size / 1024)} KB
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                    
-                    <Button 
-                      onClick={handleUpload} 
-                      disabled={!file || uploadStatus === "success"} 
-                      className="w-full bg-gradient-to-r from-[#FFFF33] to-[#33FF99] text-black hover:opacity-90 py-6 font-medium shadow-[0_5px_30px_-15px_rgba(255,255,51,0.4)]"
-                    >
-                      {uploadStatus === "success" ? "Resume Uploaded!" : "Upload Resume"}
-                      {uploadStatus !== "success" && <Upload className="ml-2 h-4 w-4" />}
-                    </Button>
-                    
-                    {uploadStatus === "success" && (
-                      <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-4 text-green-300 text-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mx-auto mb-2 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        Thank you for your submission!
-                      </div>
-                    )}
+                  <div className="flex-1 min-w-0">
+                    <p className="font-medium truncate">{file.name}</p>
+                    <p className="text-xs text-gray-500">
+                      {Math.round(file.size / 1024)} KB
+                    </p>
                   </div>
                 </div>
+              )}
+              
+              <Button 
+                onClick={handleUpload} 
+                disabled={!file || uploadStatus === "success"} 
+                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white"
+              >
+                {uploadStatus === "success" ? (
+                  <span className="flex items-center justify-center">
+                    <CheckCircle2 className="mr-2 h-5 w-5" />
+                    Resume Uploaded!
+                  </span>
+                ) : (
+                  <span className="flex items-center justify-center">
+                    <ArrowRight className="mr-2 h-5 w-5" />
+                    Upload Resume
+                  </span>
+                )}
+              </Button>
+              
+              {uploadStatus === "success" && (
+                <div className="bg-green-50 border border-green-100 rounded-lg p-3 text-sm text-green-700 text-center">
+                  <span className="font-medium">Thank you for your submission!</span>
+                </div>
+              )}
+              
+              <div className="flex items-center justify-center text-xs text-gray-500">
+                <Shield className="h-3 w-3 mr-1" />
+                <span>Your data is secure and protected</span>
               </div>
-            </motion.div>
-          </div>
-          
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8, duration: 1 }}
-            className="mt-16 text-sm text-center max-w-xl mx-auto"
-          >
-            <p className="text-gray-500 border-t border-gray-800 pt-6">
-              Our advanced neural networks analyze job descriptions and resumes to find the perfect matches based on skills, experience and cultural fit.
-            </p>
+            </div>
           </motion.div>
         </div>
+        
+        {/* Results Section */}
+        <motion.div 
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.4, duration: 0.5 }}
+          className="bg-white rounded-xl p-8 shadow-sm border border-gray-200"
+        >
+          <h3 className="text-xl font-semibold mb-6">Matching Results</h3>
+          
+          {!matches && !isSearching ? (
+            <div className="h-[180px] flex flex-col items-center justify-center">
+              <p className="text-center text-gray-500 mb-2">
+                Enter a job description to see matching candidates
+              </p>
+              <Search className="h-6 w-6 text-gray-400" />
+            </div>
+          ) : isSearching ? (
+            <div className="h-[180px] flex flex-col items-center justify-center">
+              <div className="relative w-16 h-16 mb-4">
+                <div className="absolute top-0 left-0 w-full h-full rounded-full border-4 border-gray-200"></div>
+                <div className="absolute top-0 left-0 w-full h-full rounded-full border-t-4 border-indigo-600 animate-spin"></div>
+              </div>
+              <p className="text-indigo-600 font-medium">Finding the best matches...</p>
+            </div>
+          ) : (
+            <div className="space-y-4 max-h-[400px] overflow-auto pr-2">
+              {matches && matches.map((match) => (
+                <div key={match.id} className="bg-gray-50 rounded-lg p-4 border border-gray-100 hover:bg-gray-100 transition duration-200">
+                  <div className="flex flex-wrap md:flex-nowrap justify-between items-center mb-2">
+                    <h4 className="text-lg font-semibold">{match.name}</h4>
+                    <div className="px-3 py-1 rounded-full bg-indigo-100 text-indigo-700 font-bold text-sm">
+                      {match.matchScore}% Match
+                    </div>
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-2 mb-3">
+                    <div 
+                      className="bg-indigo-600 h-2 rounded-full" 
+                      style={{ width: `${match.matchScore}%` }}
+                    ></div>
+                  </div>
+                  <div className="flex flex-wrap gap-2 mb-2">
+                    {match.topSkills.map((skill, index) => (
+                      <span key={index} className="bg-gray-200 text-gray-700 px-2 py-1 rounded-full text-xs">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="text-sm text-gray-600">
+                    <span className="font-medium">Experience:</span> {match.experience}
+                  </div>
+                </div>
+              ))}
+              
+              <p className="text-sm text-gray-500 pt-2">
+                {matches && `Showing top ${matches.length} candidates`}
+              </p>
+            </div>
+          )}
+        </motion.div>
+        
+        <div className="text-center text-sm text-gray-500 pt-6">
+          <p>Our AI analyzes job descriptions and resumes to provide the best possible matches, using
+          <br />advanced machine learning models trained on millions of successful placements.</p>
+          
+          <div className="flex items-center justify-center gap-4 mt-4">
+            <span className="bg-gray-200 text-gray-600 px-3 py-1 rounded-full text-xs">SOC 2 Compliant</span>
+            <span className="bg-gray-200 text-gray-600 px-3 py-1 rounded-full text-xs">GDPR Compliant</span>
+            <span className="bg-gray-200 text-gray-600 px-3 py-1 rounded-full text-xs">99.9% Uptime</span>
+          </div>
+        </div>
       </div>
-      
-      <style jsx>{`
-        .perspective-1000 {
-          perspective: 1000px;
-        }
-        .glass-card {
-          transform: translateZ(0);
-          transition: transform 0.3s ease;
-        }
-        .glass-card:hover {
-          transform: translateY(-5px) translateZ(0);
-        }
-        .custom-scrollbar::-webkit-scrollbar {
-          width: 4px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-          background: rgba(255, 255, 255, 0.05);
-          border-radius: 10px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: linear-gradient(to bottom, #FF9933, #FFFF33);
-          border-radius: 10px;
-        }
-      `}</style>
-    </div>
+      <style>
+        {`
+          .gradient-border {
+            position: relative;
+            border-radius: 0.75rem;
+            background-clip: padding-box;
+            padding: 20px;
+            border: 1px solid transparent;
+            background-color: #fff;
+            transition: all 0.3s ease;
+          }
+          
+          .gradient-border::after {
+            content: '';
+            position: absolute;
+            top: -2px; 
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82);
+            border-radius: 0.85rem;
+            z-index: -1;
+            animation: animatedgradient 3s ease alternate infinite;
+            background-size: 300% 300%;
+          }
+          
+          @keyframes animatedgradient {
+            0% {
+              background-position: 0% 50%;
+            }
+            50% {
+              background-position: 100% 50%;
+            }
+            100% {
+              background-position: 0% 50%;
+            }
+          }
+        `}
+      </style>
+    </motion.div>
   );
 };
 

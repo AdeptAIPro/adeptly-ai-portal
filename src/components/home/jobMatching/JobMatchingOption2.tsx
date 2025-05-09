@@ -1,10 +1,9 @@
-
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Search, Upload, ArrowRight } from "lucide-react";
+import { Search, Upload, ArrowRight, Shield, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Form, FormField, FormItem, FormControl } from "@/components/ui/form";
+import { Form, FormField, FormItem, FormControl, FormLabel } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { FormValues, MockResumeMatch, UploadStatus } from "../types";
@@ -76,339 +75,294 @@ const JobMatchingOption2 = () => {
     }, 1000);
   };
 
-  // Animation variants for staggered children
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5
-      }
-    }
-  };
-
   return (
-    <motion.div
-      initial="hidden"
-      animate="visible"
-      variants={containerVariants}
-      className="min-h-screen bg-gradient-to-b from-[#222222] to-[#111111] text-white py-20 px-4"
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="bg-gradient-to-br from-gray-50 to-gray-100 text-gray-800 py-16 px-6 md:px-10"
     >
-      <div className="max-w-7xl mx-auto relative">
-        {/* Decorative elements */}
-        <div className="absolute -top-20 -left-20 w-64 h-64 rounded-full bg-[#FF3D71]/20 blur-3xl"></div>
-        <div className="absolute -bottom-20 -right-20 w-80 h-80 rounded-full bg-[#0095FF]/20 blur-3xl"></div>
-        
-        <motion.div
-          variants={itemVariants}
-          className="text-center mb-16"
-        >
-          <h1 className="text-5xl font-bold mb-6 relative inline-block">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF3D71] to-[#0095FF]">
-              AI-Powered Talent Matching
-            </span>
-            <div className="absolute bottom-0 w-full h-1 bg-gradient-to-r from-[#FF3D71] to-[#0095FF] rounded-full"></div>
-          </h1>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+      <div className="max-w-7xl mx-auto space-y-12">
+        <div className="text-center">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            AI-Powered Talent Matching
+          </h2>
+          
+          <p className="text-lg mb-12 max-w-3xl mx-auto">
             Find the perfect candidates for your positions or submit your resume to be matched with future opportunities.
           </p>
-        </motion.div>
+        </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          {/* Left Column - Job Description */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Job Description Section */}
           <motion.div 
-            variants={itemVariants}
-            className="lg:col-span-5 bg-[#1E1E1E] rounded-3xl overflow-hidden border border-gray-800"
+            initial={{ x: -20, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className="bg-white rounded-xl p-8 shadow-sm border border-gray-200"
           >
-            <div className="p-8">
-              <div className="flex items-center mb-6 space-x-4">
-                <div className="w-12 h-12 rounded-2xl bg-[#FF3D71] flex items-center justify-center">
-                  <Search className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h2 className="text-2xl font-bold">Job Description</h2>
-                  <p className="text-gray-400">Step 1: Describe what you're looking for</p>
-                </div>
+            <div className="flex items-center gap-3 mb-5">
+              <div className="text-indigo-600">
+                <Search className="w-5 h-5" />
               </div>
-              
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(handleSearch)} className="space-y-6">
-                  <FormField
-                    control={form.control}
-                    name="jobDescription"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormControl>
-                          <Textarea 
-                            placeholder="Describe the job position, required skills..."
-                            className="min-h-[220px] resize-none bg-[#171717] border-gray-800 focus-visible:ring-[#FF3D71] focus-visible:border-[#FF3D71] placeholder:text-gray-500 text-white"
-                            {...field}
-                          />
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <Button 
-                    type="submit" 
-                    disabled={isSearching} 
-                    className="w-full bg-[#FF3D71] hover:bg-[#FF2861] text-white font-medium py-6 rounded-xl"
-                  >
-                    {isSearching ? (
-                      <span className="flex items-center">
-                        <svg className="animate-spin -ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        Scanning Candidates...
-                      </span>
-                    ) : (
-                      <span className="flex items-center">
-                        <Search className="mr-2 h-5 w-5" />
-                        Find Matches
-                      </span>
-                    )}
-                  </Button>
-                </form>
-              </Form>
+              <h3 className="text-xl font-semibold">Enter Job Description</h3>
             </div>
-          </motion.div>
-          
-          {/* Center Column - Results */}
-          <motion.div 
-            variants={itemVariants}
-            className="lg:col-span-4 bg-[#1E1E1E] rounded-3xl overflow-hidden border border-gray-800"
-          >
-            <div className="p-8">
-              <div className="flex items-center mb-6 space-x-4">
-                <div className="w-12 h-12 rounded-2xl bg-[#0095FF] flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                  </svg>
-                </div>
-                <div>
-                  <h2 className="text-2xl font-bold">Matching Results</h2>
-                  <p className="text-gray-400">Step 2: Review matched candidates</p>
-                </div>
-              </div>
-              
-              <div className="h-[400px]">
-                {!matches && !isSearching ? (
-                  <div className="h-full flex items-center justify-center rounded-xl border-2 border-dashed border-gray-700 p-4">
-                    <div className="text-center">
-                      <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-[#171717] flex items-center justify-center">
-                        <Search className="h-10 w-10 text-gray-600" />
-                      </div>
-                      <p className="text-gray-500">
-                        Enter a job description<br />to see matching candidates
+            <p className="text-gray-600 text-sm mb-6">
+              Our AI analyzes your requirements to find the best talent match
+            </p>
+            
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(handleSearch)} className="space-y-5">
+                <FormField
+                  control={form.control}
+                  name="jobDescription"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="font-medium">Job Description</FormLabel>
+                      <FormControl>
+                        <Textarea 
+                          placeholder="Describe the job position, required skills, experience level, and responsibilities in detail..."
+                          className="min-h-[150px] resize-none border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+                          {...field}
+                        />
+                      </FormControl>
+                      <p className="text-xs text-gray-500 flex items-center mt-1">
+                        <CheckCircle2 className="h-3 w-3 mr-1 inline" />
+                        More details = better matches
                       </p>
-                    </div>
-                  </div>
-                ) : isSearching ? (
-                  <div className="h-full flex items-center justify-center">
-                    <div className="text-center">
-                      <svg className="w-24 h-24 mx-auto mb-6" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="50" cy="50" r="40" fill="none" stroke="url(#grad1)" strokeWidth="8" strokeDasharray="251.2" strokeDashoffset="100">
-                          <animateTransform 
-                            attributeName="transform" 
-                            attributeType="XML" 
-                            type="rotate"
-                            from="0 50 50"
-                            to="360 50 50"
-                            dur="2s"
-                            repeatCount="indefinite" />
-                        </circle>
-                        <defs>
-                          <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stopColor="#FF3D71" />
-                            <stop offset="100%" stopColor="#0095FF" />
-                          </linearGradient>
-                        </defs>
+                    </FormItem>
+                  )}
+                />
+                
+                <Button 
+                  type="submit" 
+                  disabled={isSearching} 
+                  className="w-full bg-indigo-600 hover:bg-indigo-700 text-white"
+                >
+                  {isSearching ? (
+                    <span className="flex items-center justify-center">
+                      <svg className="animate-spin -ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                       </svg>
-                      <p className="text-lg font-medium bg-clip-text text-transparent bg-gradient-to-r from-[#FF3D71] to-[#0095FF]">
-                        Finding ideal matches...
-                      </p>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="space-y-4 overflow-auto h-full pr-2 custom-scrollbar">
-                    {matches && matches.map((match) => (
-                      <div key={match.id} className="group bg-[#171717] hover:bg-[#2A2A2A] rounded-xl p-4 border border-gray-800 hover:border-[#0095FF] transition duration-300">
-                        <div className="flex justify-between items-center mb-3">
-                          <h4 className="text-xl font-bold text-white group-hover:text-[#0095FF] transition duration-300">{match.name}</h4>
-                          <div className="px-3 py-1 rounded-full bg-gradient-to-r from-[#FF3D71] to-[#0095FF] text-white font-bold text-sm">
-                            {match.matchScore}% Match
-                          </div>
-                        </div>
-                        <div className="w-full h-2 bg-gray-800 rounded-full mb-3">
-                          <div 
-                            className="h-full rounded-full bg-gradient-to-r from-[#FF3D71] to-[#0095FF]" 
-                            style={{ width: `${match.matchScore}%` }}
-                          ></div>
-                        </div>
-                        <div className="flex flex-wrap gap-2 mb-2">
-                          {match.topSkills.map((skill, index) => (
-                            <span key={index} className="bg-[#333] text-gray-300 px-2 py-1 rounded-md text-xs">
-                              {skill}
-                            </span>
-                          ))}
-                        </div>
-                        <div className="text-sm text-gray-400">
-                          Experience: <span className="text-gray-300">{match.experience}</span>
-                        </div>
-                      </div>
-                    ))}
-                    
-                    {matches && (
-                      <p className="text-sm text-gray-500 pt-2">
-                        Showing top {matches.length} candidates
-                      </p>
-                    )}
-                  </div>
-                )}
-              </div>
-            </div>
+                      Searching...
+                    </span>
+                  ) : (
+                    <span className="flex items-center justify-center">
+                      <Search className="mr-2 h-5 w-5" />
+                      Find Matches
+                    </span>
+                  )}
+                </Button>
+              </form>
+            </Form>
           </motion.div>
           
-          {/* Right Column - Resume Upload */}
+          {/* Resume Upload Section */}
           <motion.div 
-            variants={itemVariants}
-            className="lg:col-span-3 bg-[#1E1E1E] rounded-3xl overflow-hidden border border-gray-800"
+            initial={{ x: 20, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+            className="bg-white rounded-xl p-8 shadow-sm border border-gray-200"
           >
-            <div className="p-8">
-              <div className="flex items-center mb-6 space-x-4">
-                <div className="w-12 h-12 rounded-2xl bg-[#00CFDD] flex items-center justify-center">
-                  <Upload className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h2 className="text-2xl font-bold">Submit Resume</h2>
-                  <p className="text-gray-400">Step 3: Add your profile</p>
-                </div>
+            <div className="flex items-center gap-3 mb-5">
+              <div className="text-indigo-600">
+                <Upload className="w-5 h-5" />
               </div>
-              
-              <div className="mb-6">
-                <Link to="/marketplace/talent">
-                  <Button 
-                    className="w-full bg-gradient-to-r from-[#00CFDD] to-[#00A3FF] hover:opacity-90 text-white py-6 rounded-xl font-medium group"
-                  >
-                    Explore Talent Marketplace
-                    <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                </Link>
-                <p className="text-xs text-gray-500 mt-2 text-center">
-                  Browse our talents database
-                </p>
-              </div>
-              
-              <div className="space-y-5 rounded-xl">
-                <div className="bg-[#171717] rounded-xl p-6 border border-gray-800">
+              <h3 className="text-xl font-semibold">Submit Your Resume</h3>
+            </div>
+            <p className="text-gray-600 text-sm mb-6">
+              Join our talent marketplace to get matched with opportunities
+            </p>
+            
+            <div className="space-y-6">
+              <div className="resume-container">
+                <label className="resume-label">
+                  Drag & drop your resume here, or click to select a file
+                </label>
+                <div className="resume-drop">
+                  <Upload className="h-8 w-8 text-gray-400 mb-2" />
+                  <p className="text-sm text-gray-500">
+                    Supported formats: PDF, DOC, DOCX
+                  </p>
                   <input
                     type="file"
-                    id="resume-upload"
-                    className="sr-only"
+                    className="resume-input"
                     onChange={handleFileChange}
                     accept=".pdf,.doc,.docx"
                   />
-                  <label
-                    htmlFor="resume-upload"
-                    className="group flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-xl cursor-pointer border-gray-700 hover:border-[#00CFDD] transition duration-300"
-                  >
-                    <div className="flex flex-col items-center justify-center py-4">
-                      <div className="w-12 h-12 rounded-full bg-gray-800 group-hover:bg-[#00CFDD]/20 flex items-center justify-center mb-2 transition duration-300">
-                        <Upload className="w-6 h-6 text-gray-400 group-hover:text-[#00CFDD]" />
-                      </div>
-                      <p className="text-sm text-center">
-                        <span className="font-medium group-hover:text-[#00CFDD] transition duration-300">Click to upload</span> or drag and drop
-                      </p>
-                      <p className="text-xs text-gray-500 mt-1">
-                        PDF, DOC, DOCX (MAX. 5MB)
-                      </p>
-                    </div>
-                  </label>
-                  
-                  {uploadStatus === "error" && (
-                    <div className="mt-4 bg-[#3A1A1A] border border-red-500/30 text-red-400 rounded-lg p-3 text-sm">
-                      <span>{errorMessage}</span>
-                    </div>
-                  )}
-                  
-                  {file && uploadStatus !== "error" && (
-                    <div className="mt-4 bg-[#222] rounded-lg p-3 border border-gray-700">
-                      <div className="flex items-center">
-                        <div className="bg-[#00CFDD]/10 rounded-lg p-2 mr-3">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#00CFDD]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                          </svg>
-                        </div>
-                        <div className="text-sm flex-1">
-                          <p className="font-medium truncate">{file.name}</p>
-                          <p className="text-gray-500">
-                            {Math.round(file.size / 1024)} KB
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                  
-                  <Button 
-                    onClick={handleUpload} 
-                    disabled={!file || uploadStatus === "success"} 
-                    className="w-full mt-4 bg-gradient-to-r from-[#00CFDD] to-[#00A3FF] hover:opacity-90 text-white"
-                  >
-                    {uploadStatus === "success" ? "Resume Uploaded!" : "Upload Resume"}
-                    {uploadStatus !== "success" && <Upload className="ml-2 h-4 w-4" />}
-                  </Button>
-                  
-                  {uploadStatus === "success" && (
-                    <div className="mt-4 bg-[#1A2B1F] border border-green-500/30 rounded-lg p-3 text-green-400 text-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-auto mb-1 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      Thank you for your submission!
-                    </div>
-                  )}
                 </div>
+              </div>
+              
+              {uploadStatus === "error" && (
+                <div className="flex items-center gap-2 text-red-500 text-sm bg-red-50 p-3 rounded-lg">
+                  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 16.0001V16.0101M12 8.00007V12.0001M12 22.0001C17.5228 22.0001 22 17.5229 22 12.0001C22 6.47721 17.5228 2.00007 12 2.00007C6.47715 2.00007 2 6.47721 2 12.0001C2 17.5229 6.47715 22.0001 12 22.0001Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  <span>{errorMessage}</span>
+                </div>
+              )}
+              
+              {file && uploadStatus !== "error" && (
+                <div className="flex items-center gap-3 bg-gray-50 p-3 rounded-lg">
+                  <div className="bg-indigo-100 rounded-lg p-2">
+                    <svg className="h-6 w-6 text-indigo-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M14 2.26953V6.40007C14 6.96012 14 7.24015 14.109 7.45406C14.2049 7.64222 14.3578 7.7952 14.546 7.89108C14.7599 8.00007 15.0399 8.00007 15.6 8.00007H19.7305M14 2.00007H8.8C7.11984 2.00007 6.27976 2.00007 5.63803 2.32715C5.07354 2.6146 4.6146 3.07354 4.32715 3.63803C4 4.27976 4 5.11984 4 6.80005V17.2001C4 18.8803 4 19.7203 4.32715 20.3621C4.6146 20.9266 5.07354 21.3855 5.63803 21.673C6.27976 22.0001 7.11984 22.0001 8.8 22.0001H15.2C16.8802 22.0001 17.7202 22.0001 18.362 21.673C18.9265 21.3855 19.3854 20.9266 19.6729 20.3621C20 19.7203 20 18.8803 20 17.2001V8.00007" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-medium truncate">{file.name}</p>
+                    <p className="text-xs text-gray-500">
+                      {Math.round(file.size / 1024)} KB
+                    </p>
+                  </div>
+                </div>
+              )}
+              
+              <Button 
+                onClick={handleUpload} 
+                disabled={!file || uploadStatus === "success"} 
+                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white"
+              >
+                {uploadStatus === "success" ? (
+                  <span className="flex items-center justify-center">
+                    <CheckCircle2 className="mr-2 h-5 w-5" />
+                    Resume Uploaded!
+                  </span>
+                ) : (
+                  <span className="flex items-center justify-center">
+                    <ArrowRight className="mr-2 h-5 w-5" />
+                    Upload Resume
+                  </span>
+                )}
+              </Button>
+              
+              {uploadStatus === "success" && (
+                <div className="bg-green-50 border border-green-100 rounded-lg p-3 text-sm text-green-700 text-center">
+                  <span className="font-medium">Thank you for your submission!</span>
+                </div>
+              )}
+              
+              <div className="flex items-center justify-center text-xs text-gray-500">
+                <Shield className="h-3 w-3 mr-1" />
+                <span>Your data is secure and protected</span>
               </div>
             </div>
           </motion.div>
         </div>
         
+        {/* Results Section */}
         <motion.div 
-          variants={itemVariants}
-          className="mt-12 text-center max-w-xl mx-auto"
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.4, duration: 0.5 }}
+          className="bg-white rounded-xl p-8 shadow-sm border border-gray-200"
         >
-          <p className="text-gray-500">
-            Our advanced AI analyzes job descriptions and resumes to provide precise matches based on skills, experience, and cultural fit criteria.
-          </p>
+          <h3 className="text-xl font-semibold mb-6">Matching Results</h3>
+          
+          {!matches && !isSearching ? (
+            <div className="h-[180px] flex flex-col items-center justify-center">
+              <p className="text-center text-gray-500 mb-2">
+                Enter a job description to see matching candidates
+              </p>
+              <Search className="h-6 w-6 text-gray-400" />
+            </div>
+          ) : isSearching ? (
+            <div className="h-[180px] flex flex-col items-center justify-center">
+              <div className="relative w-16 h-16 mb-4">
+                <div className="absolute top-0 left-0 w-full h-full rounded-full border-4 border-gray-200"></div>
+                <div className="absolute top-0 left-0 w-full h-full rounded-full border-t-4 border-indigo-600 animate-spin"></div>
+              </div>
+              <p className="text-indigo-600 font-medium">Finding the best matches...</p>
+            </div>
+          ) : (
+            <div className="space-y-4 max-h-[400px] overflow-auto pr-2">
+              {matches && matches.map((match) => (
+                <div key={match.id} className="bg-gray-50 rounded-lg p-4 border border-gray-100 hover:bg-gray-100 transition duration-200">
+                  <div className="flex flex-wrap md:flex-nowrap justify-between items-center mb-2">
+                    <h4 className="text-lg font-semibold">{match.name}</h4>
+                    <div className="px-3 py-1 rounded-full bg-indigo-100 text-indigo-700 font-bold text-sm">
+                      {match.matchScore}% Match
+                    </div>
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-2 mb-3">
+                    <div 
+                      className="bg-indigo-600 h-2 rounded-full" 
+                      style={{ width: `${match.matchScore}%` }}
+                    ></div>
+                  </div>
+                  <div className="flex flex-wrap gap-2 mb-2">
+                    {match.topSkills.map((skill, index) => (
+                      <span key={index} className="bg-gray-200 text-gray-700 px-2 py-1 rounded-full text-xs">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="text-sm text-gray-600">
+                    <span className="font-medium">Experience:</span> {match.experience}
+                  </div>
+                </div>
+              ))}
+              
+              <p className="text-sm text-gray-500 pt-2">
+                {matches && `Showing top ${matches.length} candidates`}
+              </p>
+            </div>
+          )}
         </motion.div>
+        
+        <div className="text-center text-sm text-gray-500 pt-6">
+          <p>Our AI analyzes job descriptions and resumes to provide the best possible matches, using
+          <br />advanced machine learning models trained on millions of successful placements.</p>
+          
+          <div className="flex items-center justify-center gap-4 mt-4">
+            <span className="bg-gray-200 text-gray-600 px-3 py-1 rounded-full text-xs">SOC 2 Compliant</span>
+            <span className="bg-gray-200 text-gray-600 px-3 py-1 rounded-full text-xs">GDPR Compliant</span>
+            <span className="bg-gray-200 text-gray-600 px-3 py-1 rounded-full text-xs">99.9% Uptime</span>
+          </div>
+        </div>
       </div>
-      
-      <style jsx>{`
-        .custom-scrollbar::-webkit-scrollbar {
-          width: 4px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-          background: #171717;
-          border-radius: 10px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: linear-gradient(to bottom, #FF3D71, #0095FF);
-          border-radius: 10px;
-        }
-      `}</style>
     </motion.div>
   );
 };
 
 export default JobMatchingOption2;
+
+<style>
+  {`
+    .resume-container {
+      position: relative;
+    }
+    
+    .resume-label {
+      color: #718096;
+      display: block;
+      font-size: 0.875rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .resume-drop {
+      border: 2px dashed #CBD5E0;
+      border-radius: 0.5rem;
+      padding: 2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .resume-drop:hover {
+      border-color: #4A5568;
+      background-color: #F7FAFC;
+    }
+    
+    .resume-input {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+  `}
+</style>
