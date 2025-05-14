@@ -203,6 +203,25 @@ const Navbar = () => {
                   )}
                 </Link>
               ))}
+
+              <Link
+                to="/privacy-policy"
+                className={cn(
+                  "text-sm font-medium transition-colors hover:text-primary relative py-2 px-5",
+                  location.pathname === "/privacy-policy"
+                    ? "text-primary"
+                    : "text-foreground/80 hover:text-foreground"
+                )}
+              >
+                Privacy
+                {location.pathname === "/privacy-policy" && (
+                  <motion.div
+                    className="absolute bottom-0 left-0 h-0.5 bg-primary w-full"
+                    layoutId="navbar-indicator"
+                    transition={{ type: "spring", duration: 0.6 }}
+                  />
+                )}
+              </Link>
               
               {isAuthenticated && (
                 <Link
@@ -333,6 +352,18 @@ const Navbar = () => {
                   {item.name}
                 </Link>
               ))}
+              
+              <Link
+                to="/privacy-policy"
+                className={cn(
+                  "block px-5 py-4 text-base font-medium border-b border-border",
+                  location.pathname === "/privacy-policy"
+                    ? "text-primary"
+                    : "text-foreground/80 hover:text-primary"
+                )}
+              >
+                Privacy Policy
+              </Link>
               
               {isAuthenticated && (
                 <Link

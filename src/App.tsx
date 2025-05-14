@@ -23,6 +23,7 @@ import AboutPage from "./pages/About";
 import CompanyPage from "./pages/Company";
 import Contact from "./pages/Contact";
 import TalentMarketplace from "./pages/TalentMarketplace";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 // Import product pages
 import AIRecruitment from "./pages/products/AIRecruitment";
@@ -106,6 +107,15 @@ const App = () => {
                   <>
                     <Navbar />
                     <Contact />
+                    <Footer />
+                  </>
+                } />
+                
+                {/* Privacy Policy Page */}
+                <Route path="/privacy-policy" element={
+                  <>
+                    <Navbar />
+                    <PrivacyPolicy />
                     <Footer />
                   </>
                 } />

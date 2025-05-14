@@ -114,9 +114,9 @@ const Footer = () => {
               © {new Date().getFullYear()} Adept AI. All rights reserved.
             </p>
             <div className="flex space-x-6">
-              <a href="#" className="text-gray-400 text-sm hover:text-white transition duration-300">
+              <Link to="/privacy-policy" className="text-gray-400 text-sm hover:text-white transition duration-300">
                 Privacy Policy
-              </a>
+              </Link>
               <a href="#" className="text-gray-400 text-sm hover:text-white transition duration-300">
                 Terms of Service
               </a>
