@@ -1,10 +1,10 @@
-
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import SectionHeading from "@/components/SectionHeading";
 import FeatureCard from "@/components/FeatureCard";
 import TestimonialCard from "@/components/TestimonialCard";
 import CTASection from "@/components/CTASection";
+import ResumeUploadSection from "@/components/home/ResumeUploadSection";
 import { 
   ArrowRight, 
   BrainCircuit, 
@@ -18,7 +18,10 @@ import {
   MessageSquare, 
   PanelRight, 
   UserCheck, 
-  Zap
+  Zap,
+  Users,
+  TrendingUp,
+  Shield
 } from "lucide-react";
 import { motion } from "framer-motion";
 import SolutionsOverview from "@/components/home/SolutionsOverview";
@@ -26,7 +29,7 @@ import ServiceSteps from "@/components/home/ServiceSteps";
 import AIPoweredRecruitment from "@/components/home/AIPoweredRecruitment";
 import MissionVision from "@/components/home/MissionVision";
 import FeatureHighlights from "@/components/home/FeatureHighlights";
-import JobMatchingSelectorDemo from "@/components/home/jobMatching/JobMatchingSelectorDemo"; // Import the demo component
+import JobMatchingSelectorDemo from "@/components/home/jobMatching/JobMatchingSelectorDemo";
 
 const Index = () => {
   const fadeIn = {
@@ -50,7 +53,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
+      {/* Enhanced Hero Section with Dual Value Proposition */}
       <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-indigo-50 -z-10" />
         <div className="absolute inset-0 opacity-20 bg-neural-pattern -z-10" />
@@ -63,7 +66,7 @@ const Index = () => {
               variants={fadeIn}
             >
               <span className="inline-block px-4 py-1.5 mb-6 text-sm font-medium rounded-full bg-primary/10 text-primary">
-                Powering the Future with AI
+                AI Workforce Intelligence Platform
               </span>
             </motion.div>
             
@@ -80,8 +83,8 @@ const Index = () => {
                 }
               }}
             >
-              AI-driven Solutions for the{" "}
-              <span className="text-gradient">Modern Enterprise</span>
+              Where Top Talent Meets{" "}
+              <span className="text-gradient">Smart Employers</span>
             </motion.h1>
             
             <motion.p
@@ -97,12 +100,12 @@ const Index = () => {
                 }
               }}
             >
-              Transform your business operations with our cutting-edge AI solutions that optimize workflows,
-              enhance decision-making, and drive innovation across your organization.
+              Get discovered by leading companies through our AI-powered talent matching. 
+              Skip lengthy applications - let our intelligent system connect you with your dream job automatically.
             </motion.p>
             
             <motion.div 
-              className="flex flex-col sm:flex-row gap-4 justify-center"
+              className="flex flex-col sm:flex-row gap-4 justify-center mb-8"
               initial="hidden"
               animate="visible"
               variants={{
@@ -114,13 +117,58 @@ const Index = () => {
                 }
               }}
             >
-              <Button size="lg" className="bg-primary hover:bg-primary/90 group">
-                Request Demo
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
+              <Link to="/marketplace/talent">
+                <Button size="lg" className="bg-primary hover:bg-primary/90 group">
+                  Submit Your Resume
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </Link>
               <Button size="lg" variant="outline">
-                Learn More
+                See How It Works
               </Button>
+            </motion.div>
+
+            {/* Candidate Benefits */}
+            <motion.div 
+              className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto mb-12"
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { 
+                  opacity: 1, 
+                  y: 0,
+                  transition: { duration: 0.6, delay: 0.8 }
+                }
+              }}
+            >
+              <div className="flex items-center gap-3 bg-white/50 rounded-lg p-4">
+                <div className="h-10 w-10 bg-green-100 rounded-full flex items-center justify-center">
+                  <Check className="h-5 w-5 text-green-600" />
+                </div>
+                <div className="text-left">
+                  <p className="font-medium text-sm">Auto-Matching</p>
+                  <p className="text-xs text-muted-foreground">Get matched instantly</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 bg-white/50 rounded-lg p-4">
+                <div className="h-10 w-10 bg-blue-100 rounded-full flex items-center justify-center">
+                  <Shield className="h-5 w-5 text-blue-600" />
+                </div>
+                <div className="text-left">
+                  <p className="font-medium text-sm">100% Confidential</p>
+                  <p className="text-xs text-muted-foreground">Your data is secure</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 bg-white/50 rounded-lg p-4">
+                <div className="h-10 w-10 bg-purple-100 rounded-full flex items-center justify-center">
+                  <TrendingUp className="h-5 w-5 text-purple-600" />
+                </div>
+                <div className="text-left">
+                  <p className="font-medium text-sm">Exclusive Jobs</p>
+                  <p className="text-xs text-muted-foreground">Access hidden market</p>
+                </div>
+              </div>
             </motion.div>
           </div>
           
@@ -148,7 +196,7 @@ const Index = () => {
           </motion.div>
         </div>
         
-        {/* Stats Section */}
+        {/* Enhanced Stats Section with Candidate Focus */}
         <div className="container mx-auto px-4 mt-20">
           <motion.div 
             className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
@@ -158,10 +206,10 @@ const Index = () => {
             variants={staggerContainer}
           >
             {[
-              { label: "Clients", value: "200+" },
-              { label: "Global Reach", value: "30+ Countries" },
-              { label: "Data Processed", value: "10+ PB" },
-              { label: "Accuracy Rate", value: "99.8%" }
+              { label: "Candidates Placed", value: "2,000+" },
+              { label: "Partner Companies", value: "200+" },
+              { label: "Success Rate", value: "95%" },
+              { label: "Avg. Time to Match", value: "3 Days" }
             ].map((stat, index) => (
               <motion.div 
                 key={index} 
@@ -176,16 +224,165 @@ const Index = () => {
         </div>
       </section>
 
-      {/* New Sections */}
+      {/* Enhanced Resume Upload Section - Moved Higher */}
+      <ResumeUploadSection />
+
+      {/* Candidate Success Stories */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <SectionHeading 
+            eyebrow="Success Stories"
+            title="Real People, Real Results"
+            description="See how our AI platform has transformed careers and connected top talent with leading companies."
+          />
+          
+          <motion.div 
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mt-12"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerContainer}
+          >
+            {[
+              {
+                quote: "I uploaded my resume and got matched with my dream job at a Fortune 500 company within 48 hours. The AI really understood my skills!",
+                author: "Sarah Chen",
+                role: "Senior Software Engineer",
+                company: "TechCorp"
+              },
+              {
+                quote: "As an employer, finding qualified candidates used to take months. Now we get perfect matches in days. Game changer!",
+                author: "Michael Rodriguez",
+                role: "VP of Engineering",
+                company: "InnovateNow"
+              },
+              {
+                quote: "The platform found opportunities I never would have discovered on my own. My salary increased by 40%!",
+                author: "Emma Johnson",
+                role: "Data Scientist",
+                company: "AI Solutions Inc"
+              }
+            ].map((testimonial, index) => (
+              <motion.div key={index} variants={fadeIn}>
+                <TestimonialCard
+                  quote={testimonial.quote}
+                  author={testimonial.author}
+                  role={testimonial.role}
+                  company={testimonial.company}
+                />
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* How Our AI Works for Both Sides */}
+      <section className="py-20 bg-muted">
+        <div className="container mx-auto px-4">
+          <SectionHeading 
+            eyebrow="How It Works"
+            title="Intelligent Matching for Everyone"
+            description="Our AI creates win-win connections between exceptional talent and forward-thinking employers."
+          />
+          
+          <div className="max-w-6xl mx-auto mt-16">
+            <motion.div 
+              className="grid md:grid-cols-2 gap-12"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={staggerContainer}
+            >
+              {/* For Candidates */}
+              <motion.div variants={fadeIn} className="bg-white rounded-lg p-8 shadow-sm">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="h-12 w-12 bg-blue-100 rounded-full flex items-center justify-center">
+                    <Users className="h-6 w-6 text-blue-600" />
+                  </div>
+                  <h3 className="text-2xl font-bold">For Candidates</h3>
+                </div>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <div className="h-6 w-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                      <span className="text-xs font-bold text-blue-600">1</span>
+                    </div>
+                    <div>
+                      <p className="font-medium">Upload Your Resume</p>
+                      <p className="text-sm text-muted-foreground">Our AI analyzes your skills, experience, and career goals</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="h-6 w-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                      <span className="text-xs font-bold text-blue-600">2</span>
+                    </div>
+                    <div>
+                      <p className="font-medium">Get Auto-Matched</p>
+                      <p className="text-sm text-muted-foreground">Receive perfect job matches based on AI analysis</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="h-6 w-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                      <span className="text-xs font-bold text-blue-600">3</span>
+                    </div>
+                    <div>
+                      <p className="font-medium">Land Your Dream Job</p>
+                      <p className="text-sm text-muted-foreground">Connect directly with hiring managers at top companies</p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* For Employers */}
+              <motion.div variants={fadeIn} className="bg-white rounded-lg p-8 shadow-sm">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="h-12 w-12 bg-purple-100 rounded-full flex items-center justify-center">
+                    <BrainCircuit className="h-6 w-6 text-purple-600" />
+                  </div>
+                  <h3 className="text-2xl font-bold">For Employers</h3>
+                </div>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <div className="h-6 w-6 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                      <span className="text-xs font-bold text-purple-600">1</span>
+                    </div>
+                    <div>
+                      <p className="font-medium">Define Your Needs</p>
+                      <p className="text-sm text-muted-foreground">Specify role requirements and company culture fit</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="h-6 w-6 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                      <span className="text-xs font-bold text-purple-600">2</span>
+                    </div>
+                    <div>
+                      <p className="font-medium">AI Finds Perfect Matches</p>
+                      <p className="text-sm text-muted-foreground">Our algorithm surfaces the best candidates from our talent pool</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="h-6 w-6 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                      <span className="text-xs font-bold text-purple-600">3</span>
+                    </div>
+                    <div>
+                      <p className="font-medium">Hire Top Talent</p>
+                      <p className="text-sm text-muted-foreground">Connect with pre-qualified candidates who fit your exact needs</p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Existing sections */}
       <SolutionsOverview />
       <ServiceSteps />
       <AIPoweredRecruitment />
       <MissionVision />
       <FeatureHighlights />
-      
-      {/* Job Matching Section with Design Options */}
       <JobMatchingSelectorDemo />
-      
+
       {/* Features Section */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
@@ -246,134 +443,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* How It Works Section */}
-      <section className="py-20 bg-muted">
-        <div className="container mx-auto px-4">
-          <SectionHeading 
-            eyebrow="Our Process"
-            title="How Adept AI Works"
-            description="A simple, effective process to implement AI solutions tailored to your business needs."
-          />
-          
-          <div className="max-w-5xl mx-auto mt-16">
-            <div className="relative">
-              {/* Vertical line */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-px bg-primary/30" />
-              
-              <motion.div 
-                className="space-y-24"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
-                variants={staggerContainer}
-              >
-                {[
-                  {
-                    number: "01",
-                    title: "Discover",
-                    description: "We start by understanding your business, challenges, and goals through in-depth consultation."
-                  },
-                  {
-                    number: "02",
-                    title: "Design",
-                    description: "Our team designs a custom AI solution tailored to your specific needs and existing systems."
-                  },
-                  {
-                    number: "03",
-                    title: "Develop",
-                    description: "We build and train your AI models with your data, ensuring accuracy and reliability."
-                  },
-                  {
-                    number: "04",
-                    title: "Deploy",
-                    description: "Seamless implementation with minimal disruption to your existing workflows and operations."
-                  }
-                ].map((step, index) => (
-                  <motion.div 
-                    key={index}
-                    className={`relative flex items-center ${index % 2 === 0 ? "flex-row" : "flex-row-reverse"}`}
-                    variants={fadeIn}
-                  >
-                    <div className={`w-1/2 ${index % 2 === 0 ? "pr-12 text-right" : "pl-12"}`}>
-                      <div className="mb-2 inline-block px-3 py-1 text-sm font-medium tracking-wider text-primary bg-primary/10 rounded-full">
-                        {step.number}
-                      </div>
-                      <h3 className="text-2xl font-display font-bold mb-2">{step.title}</h3>
-                      <p className="text-muted-foreground">{step.description}</p>
-                    </div>
-                    
-                    <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg z-10">
-                      {step.number}
-                    </div>
-                    
-                    <div className={`w-1/2 ${index % 2 === 0 ? "pl-12" : "pr-12"}`}>
-                      <div className={`bg-white rounded-lg shadow-md h-48 overflow-hidden ${index % 2 === 0 ? "transform -rotate-1" : "transform rotate-1"}`}>
-                        <div className="h-full w-full bg-gradient-to-br from-indigo-500/10 to-purple-500/10 flex items-center justify-center">
-                          <img 
-                            src={`https://images.unsplash.com/photo-148859052827${index}-${index}ad4aaf24ca7?auto=format&fit=crop&w=800&q=80`} 
-                            alt={step.title}
-                            className="w-full h-full object-cover opacity-80"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <SectionHeading 
-            eyebrow="Client Testimonials"
-            title="What Our Clients Say"
-            description="Don't just take our word for it. Here's what businesses like yours have achieved with Adept AI."
-          />
-          
-          <motion.div 
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mt-12"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={staggerContainer}
-          >
-            {[
-              {
-                quote: "Implementing Adept AI's predictive analytics has transformed our inventory management, reducing costs by 35% and improving fulfillment times.",
-                author: "Sarah Johnson",
-                role: "VP Operations",
-                company: "Global Retail Inc."
-              },
-              {
-                quote: "The natural language processing capabilities have revolutionized our customer service. Response times are down 60% while satisfaction scores are up 40%.",
-                author: "Michael Chen",
-                role: "CTO",
-                company: "TechSolutions Ltd"
-              },
-              {
-                quote: "Adept AI helped us process years of unstructured data to uncover insights we never knew existed. It's been a game-changer for our strategy.",
-                author: "Emma Rodriguez",
-                role: "Data Director",
-                company: "FinServe Group"
-              }
-            ].map((testimonial, index) => (
-              <motion.div key={index} variants={fadeIn}>
-                <TestimonialCard
-                  quote={testimonial.quote}
-                  author={testimonial.author}
-                  role={testimonial.role}
-                  company={testimonial.company}
-                />
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
       {/* Integrations Preview */}
       <section className="py-20 bg-muted">
         <div className="container mx-auto px-4">
@@ -421,13 +490,13 @@ const Index = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* Enhanced CTA Section */}
       <CTASection 
-        title="Ready to Transform Your Business with AI?"
-        description="Join hundreds of forward-thinking companies already leveraging our AI solutions."
-        primaryButtonText="Get Started"
-        primaryButtonLink="/contact"
-        secondaryButtonText="Book a Demo"
+        title="Ready to Transform Your Career or Business?"
+        description="Join thousands of professionals and companies already leveraging our AI-powered talent matching platform."
+        primaryButtonText="Submit Resume"
+        primaryButtonLink="/marketplace/talent"
+        secondaryButtonText="Request Demo"
         secondaryButtonLink="/contact"
         background="gradient"
       />
