@@ -11,7 +11,9 @@ const JobSearchDesign15 = () => {
 
   return (
     <section className="py-20 bg-gradient-to-br from-purple-900 via-blue-900 to-green-900 text-white relative overflow-hidden">
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23FBBF24" fill-opacity="0.1"%3E%3Cpath d="M20 20c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20zM0 0h40v40H0V0z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
+      <div className="absolute inset-0 opacity-30" style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FBBF24' fill-opacity='0.1'%3E%3Cpath d='M20 20c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20zM0 0h40v40H0V0z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+      }}></div>
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-6xl mx-auto">
