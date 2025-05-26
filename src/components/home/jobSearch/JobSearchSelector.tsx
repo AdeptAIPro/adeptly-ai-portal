@@ -12,6 +12,16 @@ import JobSearchDesign7 from "./JobSearchDesign7";
 import JobSearchDesign8 from "./JobSearchDesign8";
 import JobSearchDesign9 from "./JobSearchDesign9";
 import JobSearchDesign10 from "./JobSearchDesign10";
+import JobSearchDesign11 from "./JobSearchDesign11";
+import JobSearchDesign12 from "./JobSearchDesign12";
+import JobSearchDesign13 from "./JobSearchDesign13";
+import JobSearchDesign14 from "./JobSearchDesign14";
+import JobSearchDesign15 from "./JobSearchDesign15";
+import JobSearchDesign16 from "./JobSearchDesign16";
+import JobSearchDesign17 from "./JobSearchDesign17";
+import JobSearchDesign18 from "./JobSearchDesign18";
+import JobSearchDesign19 from "./JobSearchDesign19";
+import JobSearchDesign20 from "./JobSearchDesign20";
 
 const JobSearchSelector = () => {
   const [currentDesign, setCurrentDesign] = useState(1);
@@ -26,18 +36,28 @@ const JobSearchSelector = () => {
     { id: 7, name: "Passion Focused", component: JobSearchDesign7 },
     { id: 8, name: "Preference Based", component: JobSearchDesign8 },
     { id: 9, name: "Progress Tracker", component: JobSearchDesign9 },
-    { id: 10, name: "Career Potential", component: JobSearchDesign10 }
+    { id: 10, name: "Career Potential", component: JobSearchDesign10 },
+    { id: 11, name: "Elite Accelerator", component: JobSearchDesign11 },
+    { id: 12, name: "Future Tech", component: JobSearchDesign12 },
+    { id: 13, name: "Playful & Fun", component: JobSearchDesign13 },
+    { id: 14, name: "Enterprise Grade", component: JobSearchDesign14 },
+    { id: 15, name: "Gaming Quest", component: JobSearchDesign15 },
+    { id: 16, name: "Nature Organic", component: JobSearchDesign16 },
+    { id: 17, name: "Space Mission", component: JobSearchDesign17 },
+    { id: 18, name: "Creative Canvas", component: JobSearchDesign18 },
+    { id: 19, name: "Cozy & Warm", component: JobSearchDesign19 },
+    { id: 20, name: "Executive Analytics", component: JobSearchDesign20 }
   ];
 
   const currentDesignData = designs.find(d => d.id === currentDesign);
   const CurrentComponent = currentDesignData?.component || JobSearchDesign1;
 
   const nextDesign = () => {
-    setCurrentDesign(prev => prev >= 10 ? 1 : prev + 1);
+    setCurrentDesign(prev => prev >= 20 ? 1 : prev + 1);
   };
 
   const prevDesign = () => {
-    setCurrentDesign(prev => prev <= 1 ? 10 : prev - 1);
+    setCurrentDesign(prev => prev <= 1 ? 20 : prev - 1);
   };
 
   return (
@@ -54,7 +74,7 @@ const JobSearchSelector = () => {
             <ChevronLeft className="h-4 w-4" />
           </Button>
           <div className="text-center py-2 px-3 bg-blue-50 rounded text-sm font-medium">
-            {currentDesign}/10
+            {currentDesign}/20
           </div>
           <Button 
             onClick={nextDesign} 
@@ -70,6 +90,26 @@ const JobSearchSelector = () => {
       {/* Design Title */}
       <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 bg-black text-white px-4 py-2 rounded-full text-sm font-medium">
         Design {currentDesign}: {currentDesignData?.name}
+      </div>
+
+      {/* Design Grid Navigation */}
+      <div className="fixed top-4 right-4 z-50 bg-white rounded-lg shadow-lg p-4 max-w-xs">
+        <h4 className="text-sm font-semibold mb-3 text-gray-700">Quick Jump</h4>
+        <div className="grid grid-cols-5 gap-1">
+          {designs.map((design) => (
+            <button
+              key={design.id}
+              onClick={() => setCurrentDesign(design.id)}
+              className={`w-8 h-8 text-xs font-bold rounded transition-colors ${
+                currentDesign === design.id
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              }`}
+            >
+              {design.id}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Current Design Component */}

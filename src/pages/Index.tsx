@@ -30,6 +30,7 @@ import AIPoweredRecruitment from "@/components/home/AIPoweredRecruitment";
 import MissionVision from "@/components/home/MissionVision";
 import FeatureHighlights from "@/components/home/FeatureHighlights";
 import JobMatchingSelectorDemo from "@/components/home/jobMatching/JobMatchingSelectorDemo";
+import JobSearchSelector from "@/components/home/jobSearch/JobSearchSelector";
 
 const Index = () => {
   const fadeIn = {
@@ -382,6 +383,7 @@ const Index = () => {
       <MissionVision />
       <FeatureHighlights />
       <JobMatchingSelectorDemo />
+      <JobSearchSelector />
 
       {/* Features Section */}
       <section className="py-20 bg-white">
